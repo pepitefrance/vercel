@@ -2,497 +2,370 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Pépite — Le Tinder des brocantes</title>
-<meta name="description" content="Swipe, like, chine. Les meilleures pépites de brocantes livrées sur ton écran.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Pépite</title>
 <meta name="theme-color" content="#B85C38">
-<link rel="manifest" href="/manifest.json">
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --rust:#B85C38;--rust-dark:#8B3E22;--rust-light:#F0D5C4;
-  --cream:#FDF6EC;--ink:#2C1810;--ink-mid:#7A5C4A;--ink-light:#C4A882;
-  --gold:#E8C97A;--white:#FFFFFF;--border:#E8DDD0;--green:#3B7A3E;
+  --rust:#B85C38;--rust-d:#8B3E22;--rust-l:#F0D5C4;
+  --cream:#FDF6EC;--ink:#2C1810;--ink-m:#7A5C4A;--ink-l:#C4A882;
+  --gold:#E8C97A;--white:#FFF;--border:#E8DDD0;--green:#3B7A3E;
 }
-html,body{height:100%;background:#E8DDD0;}
-body{display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;}
+html,body{height:100%;background:#E8DDD0;font-family:Georgia,serif;}
 #app{
-  width:100%;max-width:430px;min-height:100dvh;
-  background-color:var(--cream);
-  background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='40' height='40' fill='%23FDF6EC'/%3E%3Ccircle cx='20' cy='20' r='0.6' fill='%23C4A882' opacity='0.18'/%3E%3Ccircle cx='5' cy='5' r='0.4' fill='%23C4A882' opacity='0.12'/%3E%3Ccircle cx='35' cy='35' r='0.4' fill='%23C4A882' opacity='0.12'/%3E%3C/svg%3E");
-  position:relative;overflow:hidden;display:flex;flex-direction:column;
+  width:100%;max-width:430px;min-height:100dvh;margin:0 auto;
+  background:#FDF6EC;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
 }
 /* HEADER */
-#hdr{background:var(--rust);padding:14px 20px 12px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
-#logo{font-family:'Libre Baskerville',serif;font-size:24px;font-style:italic;color:var(--white);letter-spacing:-0.5px;}
-#logo span{color:var(--gold);}
-#hdr-right{display:flex;gap:8px;align-items:center;}
-.hbtn{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.15);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--white);font-size:16px;transition:background .15s;position:relative;}
-.hbtn:hover{background:rgba(255,255,255,0.25);}
-#cart-n{position:absolute;top:-3px;right:-3px;background:var(--gold);color:var(--rust-dark);font-size:9px;font-weight:700;width:15px;height:15px;border-radius:50%;display:none;align-items:center;justify-content:center;}
-/* SOURCE PILLS */
-#source-pills{display:flex;gap:5px;padding:8px 16px 0;flex-shrink:0;}
-.pill{font-size:9px;padding:3px 8px;border-radius:3px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;border:1px solid;}
-.pill-ebay{color:#8B5E0A;border-color:#D4A520;background:#FFF8E0;}
-.pill-vint{color:#2D6A2D;border-color:#4A9A4A;background:#E8F5E8;}
-.pill-broc{color:var(--ink-mid);border-color:var(--border);background:transparent;}
+#hdr{background:var(--rust);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+#logo{font-size:26px;font-style:italic;color:#fff;letter-spacing:-0.5px;}
+#logo b{color:var(--gold);font-weight:400;}
+#hdr-r{display:flex;gap:8px;}
+.hbtn{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.18);border:none;cursor:pointer;font-size:18px;color:#fff;display:flex;align-items:center;justify-content:center;position:relative;}
+#cn{position:absolute;top:-3px;right:-3px;background:var(--gold);color:var(--rust-d);font-size:9px;font-weight:700;width:15px;height:15px;border-radius:50%;display:none;align-items:center;justify-content:center;}
+/* PILLS */
+#pills{display:flex;gap:5px;padding:8px 16px 0;flex-shrink:0;}
+.pill{font-size:9px;padding:3px 8px;border-radius:3px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border:1px solid;}
+.pe{color:#8B5E0A;border-color:#D4A520;background:#FFF8E0;}
+.pv{color:#2D6A2D;border-color:#4A9A4A;background:#E8F5E8;}
+.pb{color:var(--ink-m);border-color:var(--border);background:transparent;}
 /* PROGRESS */
-#prog-wrap{height:2px;background:var(--rust-light);flex-shrink:0;margin-top:8px;}
-#prog-bar{height:100%;background:var(--rust-dark);transition:width .4s;}
-#counter{text-align:center;font-size:10px;color:var(--ink-light);letter-spacing:.05em;padding:5px 0 0;flex-shrink:0;font-family:'Inter',sans-serif;}
+#pw{height:2px;background:var(--rust-l);flex-shrink:0;margin-top:8px;}
+#pb{height:100%;background:var(--rust-d);width:0%;transition:width .3s;}
+#ctr{text-align:center;font-size:11px;color:var(--ink-l);padding:5px 0 0;flex-shrink:0;font-family:sans-serif;}
 /* DECK */
-#deck-zone{position:relative;flex:1;margin:10px 16px 0;min-height:400px;}
+#deck{position:relative;flex:1;margin:10px 16px 0;min-height:380px;touch-action:none;}
 /* POLAROID */
-.pcard{
+.card{
   position:absolute;width:100%;
-  background:var(--white);padding:10px 10px 48px;
-  border-radius:3px;cursor:grab;touch-action:none;user-select:none;
-  box-shadow:0 1px 0 #ddd,0 2px 0 #ccc,0 4px 10px rgba(44,24,16,.13);
-  will-change:transform;
+  background:#fff;padding:10px 10px 50px;
+  border-radius:3px;cursor:grab;
+  box-shadow:0 1px 0 #ddd,0 2px 0 #ccc,0 4px 12px rgba(44,24,16,.15);
 }
-.pcard:active{cursor:grabbing;}
-.pcard-img{width:100%;height:0;padding-bottom:75%;position:relative;overflow:hidden;border-radius:2px;background:var(--rust-light);}
-.pcard-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
-.pcard-img .img-fail{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:52px;background:var(--rust-light);}
-.pcard-caption{
-  position:absolute;bottom:0;left:10px;right:10px;height:48px;
-  display:flex;align-items:center;justify-content:space-between;gap:8px;
-  padding:0 4px;
+.card:active{cursor:grabbing;}
+.cimg{
+  width:100%;padding-bottom:72%;position:relative;
+  overflow:hidden;border-radius:2px;
 }
-.pcard-cap-text{font-family:'Caveat',cursive;font-size:15px;color:var(--ink-mid);line-height:1.25;flex:1;}
-.pcard-price{font-family:'Libre Baskerville',serif;font-size:19px;font-weight:700;color:var(--rust);white-space:nowrap;}
-/* SWIPE HINTS */
-.sw-hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  font-family:'Libre Baskerville',serif;font-size:24px;font-style:italic;font-weight:700;
-  padding:8px 16px;border-radius:3px;border:3px solid;
-  opacity:0;pointer-events:none;transition:opacity .08s;
-  text-transform:uppercase;letter-spacing:1px;white-space:nowrap;z-index:10;}
-.sh-like{color:var(--green);border-color:var(--green);background:rgba(59,122,62,.09);}
-.sh-nope{color:var(--rust);border-color:var(--rust);background:rgba(184,92,56,.09);}
-/* SRC BADGE */
-.src-badge{display:inline-block;font-size:9px;padding:1px 5px;border-radius:2px;font-weight:500;letter-spacing:.03em;text-transform:uppercase;border:1px solid;vertical-align:middle;}
-.sb-ebay{background:#FFF8E0;color:#8B5E0A;border-color:#D4A520;}
-.sb-vint{background:#E8F5E8;color:#2D6A2D;border-color:#4A9A4A;}
-.sb-broc{background:#F0EAE0;color:var(--ink-mid);border-color:var(--border);}
+.cimg-inner{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:72px;
+}
+.ccap{
+  position:absolute;bottom:0;left:10px;right:10px;height:50px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.ccap-t{font-size:16px;color:var(--ink-m);flex:1;font-style:italic;}
+.ccap-p{font-size:20px;font-weight:700;color:var(--rust);font-family:sans-serif;}
+/* HINTS */
+.hl,.hn{
+  position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);
+  font-size:22px;font-style:italic;font-weight:700;
+  padding:7px 14px;border-radius:3px;border:3px solid;
+  opacity:0;pointer-events:none;text-transform:uppercase;letter-spacing:1px;z-index:10;
+  white-space:nowrap;
+}
+.hl{color:var(--green);border-color:var(--green);background:rgba(59,122,62,.09);}
+.hn{color:var(--rust);border-color:var(--rust);background:rgba(184,92,56,.09);}
+/* BADGE */
+.sb{font-size:9px;padding:1px 5px;border-radius:2px;font-weight:700;text-transform:uppercase;border:1px solid;vertical-align:middle;font-family:sans-serif;}
+.sbe{background:#FFF8E0;color:#8B5E0A;border-color:#D4A520;}
+.sbv{background:#E8F5E8;color:#2D6A2D;border-color:#4A9A4A;}
+.sbb{background:#F0EAE0;color:var(--ink-m);border-color:var(--border);}
 /* ACTIONS */
-#actions{display:flex;justify-content:center;align-items:center;gap:16px;padding:12px 20px;flex-shrink:0;}
-.abtn{border:none;cursor:pointer;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .12s;font-size:20px;}
+#acts{display:flex;justify-content:center;align-items:center;gap:16px;padding:14px 20px;flex-shrink:0;}
+.abtn{border:none;cursor:pointer;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;transition:transform .12s;}
 .abtn:hover{transform:scale(1.1);}
 .abtn:active{transform:scale(.93);}
-.btn-nope{width:54px;height:54px;background:var(--white);border:1.5px solid var(--rust);color:var(--rust);box-shadow:0 1px 3px rgba(44,24,16,.1);}
-.btn-like{width:66px;height:66px;background:var(--rust);color:var(--white);box-shadow:0 2px 8px rgba(184,92,56,.4);}
-.btn-info{width:42px;height:42px;background:var(--white);border:1px solid var(--border);color:var(--ink-mid);font-size:16px;box-shadow:0 1px 3px rgba(44,24,16,.06);}
+.bn{width:54px;height:54px;background:#fff;border:1.5px solid var(--rust);color:var(--rust);}
+.bl{width:66px;height:66px;background:var(--rust);color:#fff;border:none;font-size:24px;box-shadow:0 2px 8px rgba(184,92,56,.4);}
+.bi{width:42px;height:42px;background:#fff;border:1px solid var(--border);color:var(--ink-m);font-size:17px;}
 /* TOAST */
-#toast{position:absolute;bottom:90px;left:50%;transform:translateX(-50%) translateY(10px);
+#toast{
+  position:absolute;bottom:85px;left:50%;transform:translateX(-50%) translateY(10px);
   background:var(--ink);color:var(--cream);font-size:13px;padding:8px 18px;
   border-radius:20px;opacity:0;transition:opacity .2s,transform .2s;
-  white-space:nowrap;pointer-events:none;z-index:99;}
-#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-/* PANELS */
-#profile-panel,#cart-panel{
-  position:absolute;inset:0;z-index:200;display:none;flex-direction:column;
-  background-color:var(--cream);
-  background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='40' height='40' fill='%23FDF6EC'/%3E%3Ccircle cx='20' cy='20' r='0.6' fill='%23C4A882' opacity='0.18'/%3E%3C/svg%3E");
+  white-space:nowrap;pointer-events:none;z-index:99;font-family:sans-serif;
 }
-#profile-panel.open,#cart-panel.open{display:flex;}
-.panel-hdr{background:var(--rust);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
-.panel-title{font-family:'Libre Baskerville',serif;font-size:18px;font-style:italic;color:var(--white);}
-.panel-close{background:none;border:none;color:var(--white);font-size:20px;cursor:pointer;}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
+/* FIN */
+#end{display:none;flex-direction:column;align-items:center;justify-content:center;
+  height:100%;gap:16px;padding:30px;text-align:center;}
+#end.on{display:flex;}
+/* PANELS */
+.panel{position:absolute;inset:0;background:#FDF6EC;z-index:200;display:none;flex-direction:column;}
+.panel.on{display:flex;}
+.phdr{background:var(--rust);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.phdr-t{font-size:18px;font-style:italic;color:#fff;}
+.pclose{background:none;border:none;color:#fff;font-size:22px;cursor:pointer;line-height:1;}
 /* PROFILE */
-#profile-body{flex:1;overflow-y:auto;padding:14px;}
-.ps-label{font-size:10px;font-weight:500;color:var(--ink-light);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;}
-.taste-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:18px;}
-.taste-card{background:var(--white);border:1px solid var(--border);border-radius:7px;padding:9px 7px;display:flex;flex-direction:column;align-items:center;gap:4px;transition:border-color .15s;}
-.taste-card.active{border-color:var(--rust);background:var(--rust-light);}
-.taste-emoji{font-size:22px;}
-.taste-name{font-size:10px;color:var(--ink-mid);text-align:center;line-height:1.25;}
-.taste-bar{height:3px;background:var(--border);border-radius:2px;width:100%;margin-top:2px;}
-.taste-fill{height:100%;background:var(--rust);border-radius:2px;transition:width .4s;}
-.liked-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;}
-.liked-thumb{background:var(--white);border:1.5px solid var(--border);border-radius:3px;padding:5px 5px 18px;position:relative;cursor:pointer;overflow:hidden;}
-.liked-thumb:hover{border-color:var(--rust);}
-.lt-img{width:100%;height:56px;object-fit:cover;display:block;border-radius:1px;background:var(--rust-light);}
-.lt-cap{position:absolute;bottom:3px;left:5px;right:5px;font-family:'Caveat',cursive;font-size:10px;color:var(--ink-mid);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+#pb2{flex:1;overflow-y:auto;padding:14px;}
+.ps-l{font-size:10px;font-weight:700;color:var(--ink-l);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;font-family:sans-serif;}
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:18px;}
+.tc{background:#fff;border:1px solid var(--border);border-radius:7px;padding:9px 7px;
+  display:flex;flex-direction:column;align-items:center;gap:4px;transition:border-color .15s;}
+.tc.on{border-color:var(--rust);background:var(--rust-l);}
+.te{font-size:22px;}
+.tn{font-size:10px;color:var(--ink-m);text-align:center;font-family:sans-serif;}
+.tb{height:3px;background:var(--border);border-radius:2px;width:100%;margin-top:2px;}
+.tf{height:100%;background:var(--rust);border-radius:2px;transition:width .4s;}
+.lg{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;}
+.lt{background:#fff;border:1.5px solid var(--border);border-radius:3px;padding:5px 5px 18px;position:relative;}
+.lte{font-size:28px;display:flex;align-items:center;justify-content:center;height:56px;background:var(--rust-l);border-radius:2px;}
+.ltc{position:absolute;bottom:3px;left:5px;right:5px;font-size:10px;color:var(--ink-m);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-style:italic;}
 /* CART */
-#cart-body{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;}
-.citem{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:10px 12px;display:flex;align-items:center;gap:10px;}
-.citem-img{width:50px;height:50px;object-fit:cover;border-radius:3px;flex-shrink:0;background:var(--rust-light);}
-.citem-info{flex:1;}
-.citem-name{font-family:'Libre Baskerville',serif;font-size:13px;color:var(--ink);margin-bottom:2px;line-height:1.3;}
-.citem-price{font-size:13px;color:var(--rust);font-weight:500;}
-.citem-src{font-size:10px;color:var(--ink-light);margin-top:2px;}
-.crm{background:none;border:none;color:var(--ink-light);font-size:18px;cursor:pointer;padding:4px;transition:color .15s;}
-.crm:hover{color:var(--rust);}
-#cart-foot{padding:14px 16px;border-top:1px solid var(--border);background:var(--white);flex-shrink:0;}
-#cart-tot{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
-#cart-tot-lbl{font-size:13px;color:var(--ink-mid);}
-#cart-tot-amt{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--ink);}
-#cart-note{font-size:11px;color:var(--ink-light);margin-bottom:10px;line-height:1.5;}
-#btn-checkout{width:100%;background:var(--rust);color:var(--white);border:none;padding:14px;border-radius:8px;font-size:15px;font-family:'Inter',sans-serif;font-weight:500;cursor:pointer;transition:opacity .15s;}
-#btn-checkout:hover{opacity:.88;}
-/* FIN DU DECK */
-#end-screen{display:none;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:16px;padding:30px;text-align:center;}
-#end-screen.show{display:flex;}
-.end-icon{font-size:54px;}
-.end-title{font-family:'Libre Baskerville',serif;font-size:22px;font-style:italic;color:var(--ink);}
-.end-sub{font-size:13px;color:var(--ink-mid);line-height:1.65;}
-.end-btn{background:var(--rust);color:var(--white);border:none;padding:12px 28px;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;font-weight:500;cursor:pointer;margin-top:8px;}
+#cb{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;}
+.ci{background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 12px;display:flex;align-items:center;gap:10px;}
+.cie{font-size:30px;}
+.cii{flex:1;}
+.cin{font-size:13px;color:var(--ink);margin-bottom:2px;font-style:italic;}
+.cip{font-size:13px;color:var(--rust);font-weight:700;font-family:sans-serif;}
+.cis{font-size:10px;color:var(--ink-l);margin-top:2px;font-family:sans-serif;}
+.crm{background:none;border:none;color:var(--ink-l);font-size:20px;cursor:pointer;padding:4px;line-height:1;}
+#cf{padding:14px 16px;border-top:1px solid var(--border);background:#fff;flex-shrink:0;}
+#ct{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+#ctl{font-size:13px;color:var(--ink-m);font-family:sans-serif;}
+#cta{font-size:22px;color:var(--ink);}
+#cn2{font-size:11px;color:var(--ink-l);margin-bottom:10px;font-family:sans-serif;line-height:1.5;}
+#bco{width:100%;background:var(--rust);color:#fff;border:none;padding:14px;border-radius:8px;font-size:15px;cursor:pointer;font-family:sans-serif;font-weight:500;}
 </style>
 </head>
 <body>
 <div id="app">
   <div id="hdr">
-    <div id="logo">Pépite<span>.</span></div>
-    <div id="hdr-right">
-      <button class="hbtn" onclick="openProfile()" title="Profil de goût">
-        <i class="ti ti-sparkles"></i>
-      </button>
-      <button class="hbtn" onclick="openCart()" title="Panier">
-        <i class="ti ti-shopping-bag"></i>
-        <span id="cart-n">0</span>
-      </button>
+    <div id="logo">Pépite<b>.</b></div>
+    <div id="hdr-r">
+      <button class="hbtn" id="btn-profile" onclick="openProfile()">✦<span id="cn"></span></button>
+      <button class="hbtn" id="btn-cart" onclick="openCart()">🛍<span id="cn2s" style="position:absolute;top:-3px;right:-3px;background:var(--gold);color:var(--rust-d);font-size:9px;font-weight:700;width:15px;height:15px;border-radius:50%;display:none;align-items:center;justify-content:center;" id="cartn">0</span></button>
     </div>
   </div>
-
-  <div id="source-pills">
-    <span class="pill pill-ebay">eBay France</span>
-    <span class="pill pill-vint">Vinted</span>
-    <span class="pill pill-broc">Vide-greniers</span>
+  <div id="pills">
+    <span class="pill pe">eBay France</span>
+    <span class="pill pv">Vinted</span>
+    <span class="pill pb">Vide-greniers</span>
   </div>
-
-  <div id="prog-wrap"><div id="prog-bar" style="width:0%"></div></div>
-  <div id="counter">1 / 108</div>
-
-  <div id="deck-zone">
-    <div id="end-screen">
-      <div class="end-icon">✦</div>
-      <div class="end-title">Tu as tout vu !</div>
-      <div class="end-sub">De nouvelles pépites arrivent chaque jour.<br>Consulte ton profil — tu commences à avoir du goût.</div>
-      <button class="end-btn" onclick="restartDeck()">Recommencer depuis le début</button>
+  <div id="pw"><div id="pb"></div></div>
+  <div id="ctr">1 / 108</div>
+  <div id="deck">
+    <div id="end">
+      <div style="font-size:52px;">✦</div>
+      <div style="font-size:20px;font-style:italic;color:var(--ink);">Tu as tout vu !</div>
+      <div style="font-size:13px;color:var(--ink-m);line-height:1.6;font-family:sans-serif;">De nouvelles pépites arrivent chaque jour.</div>
+      <button onclick="restart()" style="background:var(--rust);color:#fff;border:none;padding:12px 28px;border-radius:8px;font-size:14px;cursor:pointer;margin-top:8px;font-family:sans-serif;">Recommencer</button>
     </div>
   </div>
-
-  <div id="actions">
-    <button class="abtn btn-info" onclick="showInfo()" title="Infos">
-      <i class="ti ti-info-circle"></i>
-    </button>
-    <button class="abtn btn-nope" onclick="doNope()" title="Passer — ne plus jamais revoir">
-      <i class="ti ti-x" style="font-size:22px;"></i>
-    </button>
-    <button class="abtn btn-like" onclick="doLike()" title="Aimer">
-      <i class="ti ti-heart" style="font-size:24px;"></i>
-    </button>
-    <button class="abtn btn-info" onclick="doSurprise()" title="Infos supplémentaires">
-      <i class="ti ti-map-pin"></i>
-    </button>
+  <div id="acts">
+    <button class="abtn bi" onclick="showInfo()">ℹ</button>
+    <button class="abtn bn" onclick="doNope()">✕</button>
+    <button class="abtn bl" onclick="doLike()">♡</button>
+    <button class="abtn bi" onclick="doPin()">📍</button>
   </div>
-
   <div id="toast"></div>
-
   <!-- PROFILE -->
-  <div id="profile-panel">
-    <div class="panel-hdr">
-      <div class="panel-title">Mon profil de goût</div>
-      <button class="panel-close" onclick="closeProfile()">✕</button>
+  <div class="panel" id="pp">
+    <div class="phdr">
+      <div class="phdr-t">Mon profil de goût</div>
+      <button class="pclose" onclick="closeProfile()">✕</button>
     </div>
-    <div id="profile-body"></div>
+    <div id="pb2"></div>
   </div>
-
   <!-- CART -->
-  <div id="cart-panel">
-    <div class="panel-hdr">
-      <div class="panel-title">Mon panier</div>
-      <button class="panel-close" onclick="closeCart()">✕</button>
+  <div class="panel" id="cp">
+    <div class="phdr">
+      <div class="phdr-t">Mon panier</div>
+      <button class="pclose" onclick="closeCart()">✕</button>
     </div>
-    <div id="cart-body"></div>
-    <div id="cart-foot">
-      <div id="cart-tot">
-        <span id="cart-tot-lbl">Total estimé</span>
-        <span id="cart-tot-amt">0 €</span>
-      </div>
-      <div id="cart-note">Supprime ce que tu veux avant de confirmer.</div>
-      <button id="btn-checkout" onclick="doCheckout()">Voir les annonces →</button>
+    <div id="cb"></div>
+    <div id="cf">
+      <div id="ct"><span id="ctl">Total estimé</span><span id="cta">0 €</span></div>
+      <div id="cn2">Supprime ce que tu veux avant de confirmer.</div>
+      <button id="bco" onclick="checkout()">Voir les annonces →</button>
     </div>
   </div>
 </div>
-
 <script>
-// ─── DONNÉES ────────────────────────────────────────────────────────────────
-const ITEMS = [{"id": 60, "name": "Fin XIXe — toupie", "price": 86, "image": "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&q=80", "src": "broc", "cat": "jouets", "loc": "Rouen", "caption": "Jouets anciens · fin xixe", "tags": ["Fonte", "Tôle"], "rot": 0.5, "bg": "#FFF0E0"}, {"id": 10, "name": "Art Nouveau — moulin", "price": 30, "image": "https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=400&q=80", "src": "ebay", "cat": "cuisine", "loc": "Nice", "caption": "Arts de la table · art nouveau", "tags": ["Grès", "Cuivre"], "rot": 1.5, "bg": "#F0F5E8"}, {"id": 2, "name": "Rarissime — assiettes", "price": 22, "image": "https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?w=400&q=80", "src": "vinted", "cat": "vaisselle", "loc": "Lyon 3e", "caption": "Vaisselle · rarissime", "tags": ["Faïence", "Émaillé"], "rot": -2.5, "bg": "#EDE8F5"}, {"id": 66, "name": "Aucun défaut — chaise", "price": 187, "image": "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&q=80", "src": "broc", "cat": "mobilier", "loc": "Nantes", "caption": "Mobilier · aucun défaut", "tags": ["Bois", "Osier"], "rot": -3.0, "bg": "#F5EBE0"}, {"id": 103, "name": "XIXe — magazines", "price": 32, "image": "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?w=400&q=80", "src": "ebay", "cat": "papier", "loc": "Marseille", "caption": "Éphémères · xixe", "tags": ["Lithographie", "Sérigraphie"], "rot": 2.5, "bg": "#FDF5E0"}, {"id": 16, "name": "Fin XIXe — miroir", "price": 71, "image": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&q=80", "src": "ebay", "cat": "deco", "loc": "Marché Paul Bert", "caption": "Décoration · fin xixe", "tags": ["Doré", "Émaillé"], "rot": -2.0, "bg": "#F5F0E8"}, {"id": 63, "name": "Provenance château — robe", "price": 180, "image": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400&q=80", "src": "broc", "cat": "mode", "loc": "Marseille", "caption": "Mode vintage · provenance château", "tags": ["Laine", "Soie"], "rot": 2.0, "bg": "#E8F5ED"}, {"id": 68, "name": "Rarissime — ampli", "price": 298, "image": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&q=80", "src": "vinted", "cat": "hifi", "loc": "Lille", "caption": "Hifi & Son · rarissime", "tags": ["Analogique", "Bakélite"], "rot": -2.0, "bg": "#E8F0F5"}, {"id": 86, "name": "Brocante bretonne — service à thé", "price": 22, "image": "https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?w=400&q=80", "src": "vinted", "cat": "vaisselle", "loc": "Nantes", "caption": "Vaisselle · brocante bretonne", "tags": ["Faïence", "Émaillé"], "rot": 0.5, "bg": "#EDE8F5"}, {"id": 27, "name": "Authentique — manteau", "price": 152, "image": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400&q=80", "src": "broc", "cat": "mode", "loc": "Strasbourg", "caption": "Mode vintage · authentique", "tags": ["Lin", "Laine"], "rot": -3.0, "bg": "#E8F5ED"}, {"id": 85, "name": "Provenance château — abat-jour", "price": 25, "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80", "src": "ebay", "cat": "luminaire", "loc": "Toulouse", "caption": "Luminaires · provenance château", "tags": ["Métal", "Industriel"], "rot": 0.0, "bg": "#F5EDE0"}, {"id": 108, "name": "Brocante bretonne — soldat de plomb", "price": 61, "image": "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&q=80", "src": "broc", "cat": "jouets", "loc": "Lille", "caption": "Jouets anciens · brocante bretonne", "tags": ["Fonte", "Tôle"], "rot": -1.5, "bg": "#FFF0E0"}, {"id": 31, "name": "Art Déco — cartes postales", "price": 18, "image": "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?w=400&q=80", "src": "ebay", "cat": "papier", "loc": "Montpellier", "caption": "Éphémères · art déco", "tags": ["Lithographie", "Sérigraphie"], "rot": -1.0, "bg": "#FDF5E0"}, {"id": 33, "name": "Années 50 — estampe", "price": 443, "image": "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400&q=80", "src": "broc", "cat": "art", "loc": "Limoges", "caption": "Art · années 50", "tags": ["Gravure", "Lithographie"], "rot": 0.0, "bg": "#F5E8E8"}, {"id": 69, "name": "Original — sculpture", "price": 546, "image": "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400&q=80", "src": "broc", "cat": "art", "loc": "Rennes", "caption": "Art · original", "tags": ["Lithographie", "Fusain"], "rot": -1.5, "bg": "#F5E8E8"}, {"id": 45, "name": "Sublime — céramique d'art", "price": 235, "image": "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400&q=80", "src": "broc", "cat": "art", "loc": "Toulouse", "caption": "Art · sublime", "tags": ["Fusain", "Huile"], "rot": -0.5, "bg": "#F5E8E8"}, {"id": 61, "name": "Début XXe — lampe", "price": 195, "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80", "src": "ebay", "cat": "luminaire", "loc": "Paris 11e", "caption": "Luminaires · début xxe", "tags": ["Métal", "Industriel"], "rot": 1.0, "bg": "#F5EDE0"}, {"id": 83, "name": "Début XXe — bague", "price": 245, "image": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&q=80", "src": "vinted", "cat": "bijoux", "loc": "Marseille", "caption": "Bijoux & Montres · début xxe", "tags": ["Nacre", "Strass"], "rot": -1.0, "bg": "#F5E8F0"}, {"id": 81, "name": "XIXe — huile sur toile", "price": 339, "image": "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400&q=80", "src": "broc", "cat": "art", "loc": "Paris 11e", "caption": "Art · xixe", "tags": ["Huile", "Aquarelle"], "rot": -2.0, "bg": "#F5E8E8"}, {"id": 51, "name": "Excellent état — veste", "price": 40, "image": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400&q=80", "src": "broc", "cat": "mode", "loc": "Montpellier", "caption": "Mode vintage · excellent état", "tags": ["Velours", "Lin"], "rot": 2.5, "bg": "#E8F5ED"}, {"id": 48, "name": "Signé — soldat de plomb", "price": 135, "image": "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&q=80", "src": "broc", "cat": "jouets", "loc": "Lille", "caption": "Jouets anciens · signé", "tags": ["Fonte", "Tôle"], "rot": 1.0, "bg": "#FFF0E0"}, {"id": 64, "name": "Brocante bretonne — pendule", "price": 15, "image": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&q=80", "src": "ebay", "cat": "deco", "loc": "Bordeaux", "caption": "Décoration · brocante bretonne", "tags": ["Cuivre", "Bronze"], "rot": 2.5, "bg": "#F5F0E8"}, {"id": 71, "name": "Authentique — broche", "price": 18, "image": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&q=80", "src": "vinted", "cat": "bijoux", "loc": "Montpellier", "caption": "Bijoux & Montres · authentique", "tags": ["Or", "Argent"], "rot": -0.5, "bg": "#F5E8F0"}, {"id": 43, "name": "Belle patine — magazines", "price": 5, "image": "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?w=400&q=80", "src": "ebay", "cat": "papier", "loc": "Marseille", "caption": "Éphémères · belle patine", "tags": ["Lithographie", "Sérigraphie"], "rot": -1.5, "bg": "#FDF5E0"}, {"id": 75, "name": "Art Déco — chapeau", "price": 124, "image": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400&q=80", "src": "broc", "cat": "mode", "loc": "Marché Vanves", "caption": "Mode vintage · art déco", "tags": ["Cuir", "Velours"], "rot": 1.5, "bg": "#E8F5ED"}, {"id": 80, "name": "Années 30 — tourne-disque", "price": 177, "image": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&q=80", "src": "vinted", "cat": "hifi", "loc": "Rouen", "caption": "Hifi & Son · années 30", "tags": ["Analogique", "Bakélite"], "rot": -2.5, "bg": "#E8F0F5"}, {"id": 62, "name": "Provenance atelier — assiettes", "price": 80, "image": "https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?w=400&q=80", "src": "vinted", "cat": "vaisselle", "loc": "Lyon 3e", "caption": "Vaisselle · provenance atelier", "tags": ["Faïence", "Émaillé"], "rot": 1.5, "bg": "#EDE8F5"}, {"id": 9, "name": "Art Déco — sculpture", "price": 132, "image": "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400&q=80", "src": "broc", "cat": "art", "loc": "Rennes", "caption": "Art · art déco", "tags": ["Lithographie", "Fusain"], "rot": 1.0, "bg": "#F5E8E8"}, {"id": 22, "name": "Aucun défaut — moule", "price": 8, "image": "https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=400&q=80", "src": "ebay", "cat": "cuisine", "loc": "Lyon 3e", "caption": "Arts de la table · aucun défaut", "tags": ["Étain", "Fonte"], "rot": 1.0, "bg": "#F0F5E8"}, {"id": 38, "name": "Fin XIXe — soupière", "price": 37, "image": "https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?w=400&q=80", "src": "vinted", "cat": "vaisselle", "loc": "Saint-Ouen", "caption": "Vaisselle · fin xixe", "tags": ["Faïence", "Émaillé"], "rot": 2.5, "bg": "#EDE8F5"}, {"id": 67, "name": "Sublime — affiches", "price": 25, "image": "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?w=400&q=80", "src": "ebay", "cat": "papier", "loc": "Strasbourg", "caption": "Éphémères · sublime", "tags": ["Lithographie", "Sérigraphie"], "rot": -2.5, "bg": "#FDF5E0"}, {"id": 34, "name": "Années 60 — presse-citron", "price": 64, "image": "https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=400&q=80", "src": "ebay", "cat": "cuisine", "loc": "Vide-grenier 87", "caption": "Arts de la table · années 60", "tags": ["Email", "Grès"], "rot": 0.5, "bg": "#F0F5E8"}, {"id": 11, "name": "Années 50 — broche", "price": 154, "image": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&q=80", "src": "vinted", "cat": "bijoux", "loc": "Montpellier", "caption": "Bijoux & Montres · années 50", "tags": ["Or", "Argent"], "rot": 2.0, "bg": "#F5E8F0"}, {"id": 57, "name": "Années 70 — dessin", "price": 28, "image": "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400&q=80", "src": "broc", "cat": "art", "loc": "Brocante 69", "caption": "Art · années 70", "tags": ["Aquarelle", "Gravure"], "rot": -1.0, "bg": "#F5E8E8"}, {"id": 56, "name": "Années 60 — platine", "price": 420, "image": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&q=80", "src": "vinted", "cat": "hifi", "loc": "Marché Paul Bert", "caption": "Hifi & Son · années 60", "tags": ["Analogique", "Bakélite"], "rot": -1.5, "bg": "#E8F0F5"}, {"id": 101, "name": "Années 70 — appareil photo", "price": 130, "image": "https://images.unsplash.com/photo-1452780212108-845bb9cc0f52?w=400&q=80", "src": "vinted", "cat": "photo", "loc": "Paris 11e", "caption": "Photo & Optique · années 70", "tags": ["Argentique", "Optique"], "rot": 1.5, "bg": "#E8EEF5"}, {"id": 53, "name": "Art Déco — télémètre", "price": 178, "image": "https://images.unsplash.com/photo-1452780212108-845bb9cc0f52?w=400&q=80", "src": "vinted", "cat": "photo", "loc": "Limoges", "caption": "Photo & Optique · art déco", "tags": ["Argentique", "Optique"], "rot": -3.0, "bg": "#E8EEF5"}, {"id": 7, "name": "Excellent état — affiches", "price": 45, "image": "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?w=400&q=80", "src": "ebay", "cat": "papier", "loc": "Strasbourg", "caption": "Éphémères · excellent état", "tags": ["Lithographie", "Sérigraphie"], "rot": 0.0, "bg": "#FDF5E0"}, {"id": 42, "name": "Brocante bretonne — tabouret", "price": 480, "image": "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&q=80", "src": "broc", "cat": "mobilier", "loc": "Lyon 3e", "caption": "Mobilier · brocante bretonne", "tags": ["Osier", "Bambou"], "rot": -2.0, "bg": "#F5EBE0"}, {"id": 59, "name": "XIXe — montre", "price": 109, "image": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&q=80", "src": "vinted", "cat": "bijoux", "loc": "Versailles", "caption": "Bijoux & Montres · xixe", "tags": ["Strass", "Plaqué"], "rot": 0.0, "bg": "#F5E8F0"}, {"id": 50, "name": "Pièce unique — pichet", "price": 8, "image": "https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?w=400&q=80", "src": "vinted", "cat": "vaisselle", "loc": "Nice", "caption": "Vaisselle · pièce unique", "tags": ["Faïence", "Émaillé"], "rot": 2.0, "bg": "#EDE8F5"}, {"id": 107, "name": "Provenance château — collier", "price": 63, "image": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&q=80", "src": "vinted", "cat": "bijoux", "loc": "Strasbourg", "caption": "Bijoux & Montres · provenance château", "tags": ["Argent", "Nacre"], "rot": -2.0, "bg": "#F5E8F0"}, {"id": 79, "name": "Années 70 — partitions", "price": 12, "image": "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?w=400&q=80", "src": "ebay", "cat": "papier", "loc": "Versailles", "caption": "Éphémères · années 70", "tags": ["Lithographie", "Sérigraphie"], "rot": -3.0, "bg": "#FDF5E0"}, {"id": 92, "name": "Signé — radio", "price": 55, "image": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&q=80", "src": "vinted", "cat": "hifi", "loc": "Grenoble", "caption": "Hifi & Son · signé", "tags": ["Analogique", "Bakélite"], "rot": -3.0, "bg": "#E8F0F5"}, {"id": 98, "name": "Art Nouveau — soupière", "price": 95, "image": "https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?w=400&q=80", "src": "vinted", "cat": "vaisselle", "loc": "Saint-Ouen", "caption": "Vaisselle · art nouveau", "tags": ["Faïence", "Émaillé"], "rot": 0.0, "bg": "#EDE8F5"}, {"id": 37, "name": "XIXe — applique", "price": 68, "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80", "src": "ebay", "cat": "luminaire", "loc": "Brocante 69", "caption": "Luminaires · xixe", "tags": ["Métal", "Industriel"], "rot": 2.0, "bg": "#F5EDE0"}, {"id": 24, "name": "Rarissime — train", "price": 61, "image": "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&q=80", "src": "broc", "cat": "jouets", "loc": "Bordeaux", "caption": "Jouets anciens · rarissime", "tags": ["Fonte", "Tôle"], "rot": 2.0, "bg": "#FFF0E0"}, {"id": 40, "name": "Provenance atelier — statuette", "price": 238, "image": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&q=80", "src": "ebay", "cat": "deco", "loc": "Rouen", "caption": "Décoration · provenance atelier", "tags": ["Bronze", "Doré"], "rot": -3.0, "bg": "#F5F0E8"}, {"id": 41, "name": "Provenance château — appareil photo", "price": 272, "image": "https://images.unsplash.com/photo-1452780212108-845bb9cc0f52?w=400&q=80", "src": "vinted", "cat": "photo", "loc": "Paris 11e", "caption": "Photo & Optique · provenance château", "tags": ["Argentique", "Optique"], "rot": -2.5, "bg": "#E8EEF5"}, {"id": 19, "name": "Provenance château — partitions", "price": 32, "image": "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?w=400&q=80", "src": "ebay", "cat": "papier", "loc": "Versailles", "caption": "Éphémères · provenance château", "tags": ["Lithographie", "Sérigraphie"], "rot": -0.5, "bg": "#FDF5E0"}, {"id": 84, "name": "Provenance atelier — train", "price": 160, "image": "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&q=80", "src": "broc", "cat": "jouets", "loc": "Bordeaux", "caption": "Jouets anciens · provenance atelier", "tags": ["Fonte", "Tôle"], "rot": -0.5, "bg": "#FFF0E0"}, {"id": 6, "name": "Pièce unique — chaise", "price": 407, "image": "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&q=80", "src": "broc", "cat": "mobilier", "loc": "Nantes", "caption": "Mobilier · pièce unique", "tags": ["Bois", "Osier"], "rot": -0.5, "bg": "#F5EBE0"}, {"id": 25, "name": "Original — abat-jour", "price": 152, "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80", "src": "ebay", "cat": "luminaire", "loc": "Toulouse", "caption": "Luminaires · original", "tags": ["Métal", "Industriel"], "rot": 2.5, "bg": "#F5EDE0"}, {"id": 8, "name": "Collection — ampli", "price": 55, "image": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&q=80", "src": "vinted", "cat": "hifi", "loc": "Lille", "caption": "Hifi & Son · collection", "tags": ["Analogique", "Bakélite"], "rot": 0.5, "bg": "#E8F0F5"}, {"id": 35, "name": "Années 70 — bracelet", "price": 290, "image": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&q=80", "src": "vinted", "cat": "bijoux", "loc": "Marché Vanves", "caption": "Bijoux & Montres · années 70", "tags": ["Plaqué", "Or"], "rot": 1.0, "bg": "#F5E8F0"}, {"id": 88, "name": "Aucun défaut — tableau", "price": 182, "image": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&q=80", "src": "ebay", "cat": "deco", "loc": "Lille", "caption": "Décoration · aucun défaut", "tags": ["Bois", "Cuivre"], "rot": 1.5, "bg": "#F5F0E8"}, {"id": 47, "name": "Original — collier", "price": 199, "image": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&q=80", "src": "vinted", "cat": "bijoux", "loc": "Strasbourg", "caption": "Bijoux & Montres · original", "tags": ["Argent", "Nacre"], "rot": 0.5, "bg": "#F5E8F0"}, {"id": 3, "name": "Original — robe", "price": 68, "image": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400&q=80", "src": "broc", "cat": "mode", "loc": "Marseille", "caption": "Mode vintage · original", "tags": ["Laine", "Soie"], "rot": -2.0, "bg": "#E8F5ED"}, {"id": 52, "name": "Collection — cadre", "price": 127, "image": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&q=80", "src": "ebay", "cat": "deco", "loc": "Grenoble", "caption": "Décoration · collection", "tags": ["Émaillé", "Bois"], "rot": 3.0, "bg": "#F5F0E8"}, {"id": 17, "name": "Début XXe — objectif", "price": 130, "image": "https://images.unsplash.com/photo-1452780212108-845bb9cc0f52?w=400&q=80", "src": "vinted", "cat": "photo", "loc": "Brocante 69", "caption": "Photo & Optique · début xxe", "tags": ["Argentique", "Optique"], "rot": -1.5, "bg": "#E8EEF5"}, {"id": 39, "name": "Début XXe — sac", "price": 96, "image": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400&q=80", "src": "broc", "cat": "mode", "loc": "Versailles", "caption": "Mode vintage · début xxe", "tags": ["Soie", "Cuir"], "rot": 3.0, "bg": "#E8F5ED"}, {"id": 23, "name": "Sublime — bague", "price": 63, "image": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&q=80", "src": "vinted", "cat": "bijoux", "loc": "Marseille", "caption": "Bijoux & Montres · sublime", "tags": ["Nacre", "Strass"], "rot": 1.5, "bg": "#F5E8F0"}, {"id": 74, "name": "Collection — cafetière", "price": 52, "image": "https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?w=400&q=80", "src": "vinted", "cat": "vaisselle", "loc": "Vide-grenier 87", "caption": "Vaisselle · collection", "tags": ["Faïence", "Émaillé"], "rot": 1.0, "bg": "#EDE8F5"}, {"id": 46, "name": "Rarissime — marmite", "price": 42, "image": "https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=400&q=80", "src": "ebay", "cat": "cuisine", "loc": "Nantes", "caption": "Arts de la table · rarissime", "tags": ["Cuivre", "Étain"], "rot": 0.0, "bg": "#F0F5E8"}, {"id": 13, "name": "Années 70 — lustre", "price": 238, "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80", "src": "ebay", "cat": "luminaire", "loc": "Limoges", "caption": "Luminaires · années 70", "tags": ["Métal", "Industriel"], "rot": 3.0, "bg": "#F5EDE0"}, {"id": 49, "name": "Authentique — lanterne", "price": 280, "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80", "src": "ebay", "cat": "luminaire", "loc": "Rennes", "caption": "Luminaires · authentique", "tags": ["Métal", "Industriel"], "rot": 1.5, "bg": "#F5EDE0"}, {"id": 90, "name": "Rarissime — secrétaire", "price": 407, "image": "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&q=80", "src": "broc", "cat": "mobilier", "loc": "Nice", "caption": "Mobilier · rarissime", "tags": ["Chêne", "Bois"], "rot": 2.5, "bg": "#F5EBE0"}, {"id": 99, "name": "Années 50 — sac", "price": 12, "image": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400&q=80", "src": "broc", "cat": "mode", "loc": "Versailles", "caption": "Mode vintage · années 50", "tags": ["Soie", "Cuir"], "rot": 0.5, "bg": "#E8F5ED"}, {"id": 73, "name": "Excellent état — lustre", "price": 110, "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80", "src": "ebay", "cat": "luminaire", "loc": "Limoges", "caption": "Luminaires · excellent état", "tags": ["Métal", "Industriel"], "rot": 0.5, "bg": "#F5EDE0"}, {"id": 89, "name": "Sublime — jumelles", "price": 225, "image": "https://images.unsplash.com/photo-1452780212108-845bb9cc0f52?w=400&q=80", "src": "vinted", "cat": "photo", "loc": "Rennes", "caption": "Photo & Optique · sublime", "tags": ["Argentique", "Optique"], "rot": 2.0, "bg": "#E8EEF5"}, {"id": 20, "name": "Brocante bretonne — tourne-disque", "price": 359, "image": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&q=80", "src": "vinted", "cat": "hifi", "loc": "Rouen", "caption": "Hifi & Son · brocante bretonne", "tags": ["Analogique", "Bakélite"], "rot": 0.0, "bg": "#E8F0F5"}, {"id": 77, "name": "Années 50 — objectif", "price": 320, "image": "https://images.unsplash.com/photo-1452780212108-845bb9cc0f52?w=400&q=80", "src": "vinted", "cat": "photo", "loc": "Brocante 69", "caption": "Photo & Optique · années 50", "tags": ["Argentique", "Optique"], "rot": 2.5, "bg": "#E8EEF5"}, {"id": 44, "name": "Aucun défaut — enceintes", "price": 116, "image": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&q=80", "src": "vinted", "cat": "hifi", "loc": "Bordeaux", "caption": "Hifi & Son · aucun défaut", "tags": ["Analogique", "Bakélite"], "rot": -1.0, "bg": "#E8F0F5"}, {"id": 93, "name": "Authentique — estampe", "price": 132, "image": "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400&q=80", "src": "broc", "cat": "art", "loc": "Limoges", "caption": "Art · authentique", "tags": ["Gravure", "Lithographie"], "rot": -2.5, "bg": "#F5E8E8"}, {"id": 21, "name": "Belle patine — huile sur toile", "price": 650, "image": "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400&q=80", "src": "broc", "cat": "art", "loc": "Paris 11e", "caption": "Art · belle patine", "tags": ["Huile", "Aquarelle"], "rot": 0.5, "bg": "#F5E8E8"}, {"id": 1, "name": "Sublime — lampe", "price": 25, "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80", "src": "ebay", "cat": "luminaire", "loc": "Paris 11e", "caption": "Luminaires · sublime", "tags": ["Métal", "Industriel"], "rot": -3.0, "bg": "#F5EDE0"}, {"id": 104, "name": "Fin XIXe — enceintes", "price": 359, "image": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&q=80", "src": "vinted", "cat": "hifi", "loc": "Bordeaux", "caption": "Hifi & Son · fin xixe", "tags": ["Analogique", "Bakélite"], "rot": 3.0, "bg": "#E8F0F5"}, {"id": 94, "name": "Pièce unique — presse-citron", "price": 30, "image": "https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=400&q=80", "src": "ebay", "cat": "cuisine", "loc": "Vide-grenier 87", "caption": "Arts de la table · pièce unique", "tags": ["Email", "Grès"], "rot": -2.0, "bg": "#F0F5E8"}, {"id": 58, "name": "Années 30 — passoire", "price": 19, "image": "https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=400&q=80", "src": "ebay", "cat": "cuisine", "loc": "Saint-Ouen", "caption": "Arts de la table · années 30", "tags": ["Fonte", "Email"], "rot": -0.5, "bg": "#F0F5E8"}, {"id": 102, "name": "Années 30 — tabouret", "price": 260, "image": "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&q=80", "src": "broc", "cat": "mobilier", "loc": "Lyon 3e", "caption": "Mobilier · années 30", "tags": ["Osier", "Bambou"], "rot": 2.0, "bg": "#F5EBE0"}, {"id": 54, "name": "Art Nouveau — buffet", "price": 333, "image": "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&q=80", "src": "broc", "cat": "mobilier", "loc": "Vide-grenier 87", "caption": "Mobilier · art nouveau", "tags": ["Hêtre", "Chêne"], "rot": -2.5, "bg": "#F5EBE0"}, {"id": 96, "name": "Collection — voiture en tôle", "price": 111, "image": "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&q=80", "src": "broc", "cat": "jouets", "loc": "Marché Paul Bert", "caption": "Jouets anciens · collection", "tags": ["Fonte", "Tôle"], "rot": -1.0, "bg": "#FFF0E0"}, {"id": 26, "name": "Signé — service à thé", "price": 66, "image": "https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?w=400&q=80", "src": "vinted", "cat": "vaisselle", "loc": "Nantes", "caption": "Vaisselle · signé", "tags": ["Faïence", "Émaillé"], "rot": 3.0, "bg": "#EDE8F5"}, {"id": 72, "name": "Pièce unique — poupée", "price": 37, "image": "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&q=80", "src": "broc", "cat": "jouets", "loc": "Grenoble", "caption": "Jouets anciens · pièce unique", "tags": ["Fonte", "Tôle"], "rot": 0.0, "bg": "#FFF0E0"}, {"id": 91, "name": "Original — cartes postales", "price": 45, "image": "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?w=400&q=80", "src": "ebay", "cat": "papier", "loc": "Montpellier", "caption": "Éphémères · original", "tags": ["Lithographie", "Sérigraphie"], "rot": 3.0, "bg": "#FDF5E0"}, {"id": 78, "name": "Années 60 — table", "price": 40, "image": "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&q=80", "src": "broc", "cat": "mobilier", "loc": "Saint-Ouen", "caption": "Mobilier · années 60", "tags": ["Bambou", "Hêtre"], "rot": 3.0, "bg": "#F5EBE0"}, {"id": 65, "name": "Belle patine — loupe", "price": 82, "image": "https://images.unsplash.com/photo-1452780212108-845bb9cc0f52?w=400&q=80", "src": "vinted", "cat": "photo", "loc": "Toulouse", "caption": "Photo & Optique · belle patine", "tags": ["Argentique", "Optique"], "rot": 3.0, "bg": "#E8EEF5"}, {"id": 30, "name": "Collection — secrétaire", "price": 113, "image": "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&q=80", "src": "broc", "cat": "mobilier", "loc": "Nice", "caption": "Mobilier · collection", "tags": ["Chêne", "Bois"], "rot": -1.5, "bg": "#F5EBE0"}, {"id": 28, "name": "Pièce unique — tableau", "price": 350, "image": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&q=80", "src": "ebay", "cat": "deco", "loc": "Lille", "caption": "Décoration · pièce unique", "tags": ["Bois", "Cuivre"], "rot": -2.5, "bg": "#F5F0E8"}, {"id": 97, "name": "Art Déco — applique", "price": 238, "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80", "src": "ebay", "cat": "luminaire", "loc": "Brocante 69", "caption": "Luminaires · art déco", "tags": ["Métal", "Industriel"], "rot": -0.5, "bg": "#F5EDE0"}, {"id": 106, "name": "Provenance atelier — marmite", "price": 8, "image": "https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=400&q=80", "src": "ebay", "cat": "cuisine", "loc": "Nantes", "caption": "Arts de la table · provenance atelier", "tags": ["Cuivre", "Étain"], "rot": -2.5, "bg": "#F0F5E8"}, {"id": 5, "name": "Authentique — loupe", "price": 225, "image": "https://images.unsplash.com/photo-1452780212108-845bb9cc0f52?w=400&q=80", "src": "vinted", "cat": "photo", "loc": "Toulouse", "caption": "Photo & Optique · authentique", "tags": ["Argentique", "Optique"], "rot": -1.0, "bg": "#E8EEF5"}, {"id": 55, "name": "Années 50 — calendriers", "price": 38, "image": "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?w=400&q=80", "src": "ebay", "cat": "papier", "loc": "Marché Vanves", "caption": "Éphémères · années 50", "tags": ["Lithographie", "Sérigraphie"], "rot": -2.0, "bg": "#FDF5E0"}, {"id": 76, "name": "Art Nouveau — miroir", "price": 294, "image": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&q=80", "src": "ebay", "cat": "deco", "loc": "Marché Paul Bert", "caption": "Décoration · art nouveau", "tags": ["Doré", "Émaillé"], "rot": 2.0, "bg": "#F5F0E8"}, {"id": 12, "name": "Années 60 — poupée", "price": 111, "image": "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&q=80", "src": "broc", "cat": "jouets", "loc": "Grenoble", "caption": "Jouets anciens · années 60", "tags": ["Fonte", "Tôle"], "rot": 2.5, "bg": "#FFF0E0"}, {"id": 70, "name": "Signé — moulin", "price": 75, "image": "https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=400&q=80", "src": "ebay", "cat": "cuisine", "loc": "Nice", "caption": "Arts de la table · signé", "tags": ["Grès", "Cuivre"], "rot": -1.0, "bg": "#F0F5E8"}, {"id": 100, "name": "Années 60 — statuette", "price": 71, "image": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&q=80", "src": "ebay", "cat": "deco", "loc": "Rouen", "caption": "Décoration · années 60", "tags": ["Bronze", "Doré"], "rot": 1.0, "bg": "#F5F0E8"}, {"id": 87, "name": "Belle patine — manteau", "price": 68, "image": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400&q=80", "src": "broc", "cat": "mode", "loc": "Strasbourg", "caption": "Mode vintage · belle patine", "tags": ["Lin", "Laine"], "rot": 1.0, "bg": "#E8F5ED"}, {"id": 14, "name": "Années 30 — cafetière", "price": 95, "image": "https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?w=400&q=80", "src": "vinted", "cat": "vaisselle", "loc": "Vide-grenier 87", "caption": "Vaisselle · années 30", "tags": ["Faïence", "Émaillé"], "rot": -3.0, "bg": "#EDE8F5"}, {"id": 105, "name": "Début XXe — céramique d'art", "price": 650, "image": "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400&q=80", "src": "broc", "cat": "art", "loc": "Toulouse", "caption": "Art · début xxe", "tags": ["Fusain", "Huile"], "rot": -3.0, "bg": "#F5E8E8"}, {"id": 18, "name": "Provenance atelier — table", "price": 260, "image": "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&q=80", "src": "broc", "cat": "mobilier", "loc": "Saint-Ouen", "caption": "Mobilier · provenance atelier", "tags": ["Bambou", "Hêtre"], "rot": -1.0, "bg": "#F5EBE0"}, {"id": 29, "name": "Excellent état — jumelles", "price": 35, "image": "https://images.unsplash.com/photo-1452780212108-845bb9cc0f52?w=400&q=80", "src": "vinted", "cat": "photo", "loc": "Rennes", "caption": "Photo & Optique · excellent état", "tags": ["Argentique", "Optique"], "rot": -2.0, "bg": "#E8EEF5"}, {"id": 32, "name": "Art Nouveau — radio", "price": 238, "image": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&q=80", "src": "vinted", "cat": "hifi", "loc": "Grenoble", "caption": "Hifi & Son · art nouveau", "tags": ["Analogique", "Bakélite"], "rot": -0.5, "bg": "#E8F0F5"}, {"id": 36, "name": "Années 30 — voiture en tôle", "price": 12, "image": "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&q=80", "src": "broc", "cat": "jouets", "loc": "Marché Paul Bert", "caption": "Jouets anciens · années 30", "tags": ["Fonte", "Tôle"], "rot": 1.5, "bg": "#FFF0E0"}, {"id": 95, "name": "Excellent état — bracelet", "price": 154, "image": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&q=80", "src": "vinted", "cat": "bijoux", "loc": "Marché Vanves", "caption": "Bijoux & Montres · excellent état", "tags": ["Plaqué", "Or"], "rot": -1.5, "bg": "#F5E8F0"}, {"id": 4, "name": "Signé — pendule", "price": 182, "image": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&q=80", "src": "ebay", "cat": "deco", "loc": "Bordeaux", "caption": "Décoration · signé", "tags": ["Cuivre", "Bronze"], "rot": -1.5, "bg": "#F5F0E8"}, {"id": 15, "name": "XIXe — chapeau", "price": 12, "image": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400&q=80", "src": "broc", "cat": "mode", "loc": "Marché Vanves", "caption": "Mode vintage · xixe", "tags": ["Cuir", "Velours"], "rot": -2.5, "bg": "#E8F5ED"}, {"id": 82, "name": "Fin XIXe — moule", "price": 53, "image": "https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=400&q=80", "src": "ebay", "cat": "cuisine", "loc": "Lyon 3e", "caption": "Arts de la table · fin xixe", "tags": ["Étain", "Fonte"], "rot": -1.5, "bg": "#F0F5E8"}];
-
-
-PYEOF
-
-# Injecter le JSON dans le HTML
-python3 << 'PEOF'
-import json
-with open("/home/claude/pepite/src/items_data.json") as f:
-    items = json.load(f)
-
-js_items = json.dumps(items, ensure_ascii=False)
-
-with open("/home/claude/pepite/index.html", "a") as f:
-    f.write(f"const ITEMS = {js_items};\n\n")
-PEOF
-
-cat >> /home/claude/pepite/index.html << 'HTMLEOF2'
-const TASTE_CATS = [
-  {key:"luminaire",name:"Luminaires",emoji:"💡"},
-  {key:"vaisselle",name:"Vaisselle",emoji:"🫖"},
-  {key:"mode",name:"Mode",emoji:"🧥"},
-  {key:"deco",name:"Décoration",emoji:"🪞"},
-  {key:"photo",name:"Photo",emoji:"📷"},
-  {key:"mobilier",name:"Mobilier",emoji:"🪑"},
-  {key:"papier",name:"Éphémères",emoji:"📬"},
-  {key:"hifi",name:"Hifi",emoji:"🎵"},
-  {key:"art",name:"Art",emoji:"🖼️"},
-  {key:"cuisine",name:"Cuisine",emoji:"☕"},
-  {key:"bijoux",name:"Bijoux",emoji:"💍"},
-  {key:"jouets",name:"Jouets",emoji:"🎠"},
-];
-
-// ─── ÉTAT ────────────────────────────────────────────────────────────────────
-let idx = 0, cart = [], liked = [], noped = new Set(), taste = {};
-let dragging = false, sx = 0, curX = 0;
+var ITEMS=[{"id":1,"name":"Fin XIXe \u2014 toupie","price":12,"emoji":"\ud83c\udfae","src":"broc","cat":"jouets","loc":"Vide-grenier 87","caption":"Jouets anciens \u00b7 fin xixe","tags":["C\u00e9lulo\u00efd","Bois peint"],"rot":-1.5,"bg":"#FFF0E0"},{"id":2,"name":"Art D\u00e9co \u2014 service \u00e0 th\u00e9","price":38,"emoji":"\ud83e\udeb4","src":"broc","cat":"vaisselle","loc":"March\u00e9 Vanves","caption":"Vaisselle \u00b7 art d\u00e9co","tags":["Fa\u00efence","\u00c9maill\u00e9"],"rot":-1.0,"bg":"#EDE8F5"},{"id":3,"name":"Provenance ch\u00e2teau \u2014 lustre","price":280,"emoji":"\ud83d\udd26","src":"ebay","cat":"luminaire","loc":"Bordeaux","caption":"Luminaires \u00b7 provenance ch\u00e2teau","tags":["Laiton","Vintage"],"rot":-0.5,"bg":"#F5EDE0"},{"id":4,"name":"Authentique \u2014 platine","price":420,"emoji":"\ud83c\udfb5","src":"ebay","cat":"hifi","loc":"Nantes","caption":"Hifi \u00b7 authentique","tags":["Valves","Analogique"],"rot":0.0,"bg":"#E8F0F5"},{"id":5,"name":"Excellent \u00e9tat \u2014 huile sur toile","price":280,"emoji":"\ud83d\uddbc\ufe0f","src":"broc","cat":"art","loc":"Paris 11e","caption":"Art \u00b7 excellent \u00e9tat","tags":["Aquarelle","Gravure"],"rot":0.5,"bg":"#F5E8E8"},{"id":6,"name":"Rarissime \u2014 montre","price":290,"emoji":"\ud83d\udccd","src":"ebay","cat":"bijoux","loc":"Lyon 3e","caption":"Bijoux \u0026 Montres \u00b7 rarissime","tags":["Argent","Nacre"],"rot":1.0,"bg":"#F5E8F0"},{"id":7,"name":"Collection \u2014 cartes postales","price":45,"emoji":"\ud83d\udcec","src":"broc","cat":"papier","loc":"Brocante 69","caption":"\u00c9ph\u00e9m\u00e8res \u00b7 collection","tags":["Cartonn\u00e9","Lithographie"],"rot":1.5,"bg":"#FDF5E0"},{"id":8,"name":"Aucun d\u00e9faut \u2014 buffet","price":480,"emoji":"\ud83e\ude91","src":"broc","cat":"mobilier","loc":"Marché Paul Bert","caption":"Mobilier \u00b7 aucun d\u00e9faut","tags":["Ch\u00eane","H\u00eatre"],"rot":2.0,"bg":"#F5EBE0"},{"id":9,"name":"Belle patine \u2014 appareil photo","price":35,"emoji":"\ud83d\udcf7","src":"ebay","cat":"photo","loc":"Toulouse","caption":"Photo \u0026 Optique \u00b7 belle patine","tags":["Argentin","Optique"],"rot":2.5,"bg":"#E8EEF5"},{"id":10,"name":"Sublime \u2014 veste","price":180,"emoji":"\ud83e\udde5","src":"vinted","cat":"mode","loc":"Paris","caption":"Mode vintage \u00b7 sublime","tags":["Velours","Lin"],"rot":3.0,"bg":"#E8F5E8"},{"id":11,"name":"Provenance atelier \u2014 applique","price":25,"emoji":"\ud83d\udd26","src":"ebay","cat":"luminaire","loc":"Marseille","caption":"Luminaires \u00b7 provenance atelier","tags":["M\u00e9tal","Industriel"],"rot":-2.5,"bg":"#F5EDE0"},{"id":12,"name":"Signé \u2014 assiettes","price":95,"emoji":"\ud83e\udeb4","src":"broc","cat":"vaisselle","loc":"Rennes","caption":"Vaisselle \u00b7 sign\u00e9","tags":["Porcelaine","F\u00e4ience"],"rot":-2.0,"bg":"#EDE8F5"},{"id":13,"name":"Original \u2014 train","price":160,"emoji":"\ud83c\udfae","src":"broc","cat":"jouets","loc":"Nice","caption":"Jouets anciens \u00b7 original","tags":["T\u00f4le","Fonte"],"rot":-1.5,"bg":"#FFF0E0"},{"id":14,"name":"Authentique \u2014 radio","price":92,"emoji":"\ud83d\udcfb","src":"ebay","cat":"hifi","loc":"Strasbourg","caption":"Hifi \u00b7 authentique","tags":["Bak\u00e9lite","Transistors"],"rot":-1.0,"bg":"#E8F0F5"},{"id":15,"name":"Collection \u2014 estampe","price":650,"emoji":"\ud83d\uddbc\ufe0f","src":"broc","cat":"art","loc":"Lille","caption":"Art \u00b7 collection","tags":["Huile","Aquarelle"],"rot":-0.5,"bg":"#F5E8E8"},{"id":16,"name":"Belle patine \u2014 broche","price":18,"emoji":"\ud83d\udccd","src":"vinted","cat":"bijoux","loc":"Montpellier","caption":"Bijoux \u0026 Montres \u00b7 belle patine","tags":["Or","Argent"],"rot":0.0,"bg":"#F5E8F0"},{"id":17,"name":"Art Nouveau \u2014 partitions","price":5,"emoji":"\ud83d\udcec","src":"broc","cat":"papier","loc":"Grenoble","caption":"\u00c9ph\u00e9m\u00e8res \u00b7 art nouveau","tags":["Papier","Cartonn\u00e9"],"rot":0.5,"bg":"#FDF5E0"},{"id":18,"name":"Provenance ch\u00e2teau \u2014 secrétaire","price":40,"emoji":"\ud83e\ude91","src":"broc","cat":"mobilier","loc":"Versailles","caption":"Mobilier \u00b7 provenance ch\u00e2teau","tags":["Bois","Osier"],"rot":1.0,"bg":"#F5EBE0"},{"id":19,"name":"Rarissime \u2014 jumelles","price":320,"emoji":"\ud83d\udcf7","src":"ebay","cat":"photo","loc":"Rouen","caption":"Photo \u0026 Optique \u00b7 rarissime","tags":["Optique","M\u00e9canique"],"rot":1.5,"bg":"#E8EEF5"},{"id":20,"name":"Excellent \u00e9tat \u2014 manteau","price":22,"emoji":"\ud83e\udde5","src":"vinted","cat":"mode","loc":"Vide-grenier 87","caption":"Mode vintage \u00b7 excellent \u00e9tat","tags":["Laine","Soie"],"rot":2.0,"bg":"#E8F5E8"},{"id":21,"name":"Art D\u00e9co \u2014 lanterne","price":85,"emoji":"\ud83d\udd26","src":"ebay","cat":"luminaire","loc":"Saint-Ouen","caption":"Luminaires \u00b7 art d\u00e9co","tags":["Laiton","Vintage"],"rot":2.5,"bg":"#F5EDE0"},{"id":22,"name":"Fin XIXe \u2014 pichet","price":8,"emoji":"\ud83e\udeb4","src":"broc","cat":"vaisselle","loc":"Limoges","caption":"Vaisselle \u00b7 fin xixe","tags":["C\u00e9ramique","Fa\u00efence"],"rot":3.0,"bg":"#EDE8F5"},{"id":23,"name":"Sublime \u2014 soldat de plomb","price":12,"emoji":"\ud83c\udfae","src":"broc","cat":"jouets","loc":"Paris 11e","caption":"Jouets anciens \u00b7 sublime","tags":["Bois peint","C\u00e9lulo\u00efd"],"rot":-2.5,"bg":"#FFF0E0"},{"id":24,"name":"Provenance atelier \u2014 enceintes","price":55,"emoji":"\ud83d\udcfb","src":"ebay","cat":"hifi","loc":"Lyon 3e","caption":"Hifi \u00b7 provenance atelier","tags":["Analogique","Valves"],"rot":-2.0,"bg":"#E8F0F5"},{"id":25,"name":"Signé \u2014 c\u00e9ramique d'art","price":28,"emoji":"\ud83d\uddbc\ufe0f","src":"broc","cat":"art","loc":"Marseille","caption":"Art \u00b7 sign\u00e9","tags":["Gravure","Lithographie"],"rot":-1.5,"bg":"#F5E8E8"},{"id":26,"name":"Original \u2014 collier","price":290,"emoji":"\ud83d\udccd","src":"vinted","cat":"bijoux","loc":"Bordeaux","caption":"Bijoux \u0026 Montres \u00b7 original","tags":["Nacre","Strass"],"rot":-1.0,"bg":"#F5E8F0"},{"id":27,"name":"Authentique \u2014 calendriers","price":12,"emoji":"\ud83d\udcec","src":"broc","cat":"papier","loc":"Toulouse","caption":"\u00c9ph\u00e9m\u00e8res \u00b7 authentique","tags":["S\u00e9rigraphie","Lithographie"],"rot":-0.5,"bg":"#FDF5E0"},{"id":28,"name":"Belle patine \u2014 tabouret","price":55,"emoji":"\ud83e\ude91","src":"broc","cat":"mobilier","loc":"Nantes","caption":"Mobilier \u00b7 belle patine","tags":["Bambou","H\u00eatre"],"rot":0.0,"bg":"#F5EBE0"},{"id":29,"name":"Art Nouveau \u2014 loupe","price":65,"emoji":"\ud83d\udcf7","src":"ebay","cat":"photo","loc":"Strasbourg","caption":"Photo \u0026 Optique \u00b7 art nouveau","tags":["M\u00e9canique","Japonais"],"rot":0.5,"bg":"#E8EEF5"},{"id":30,"name":"Rarissime \u2014 robe","price":12,"emoji":"\ud83e\udde5","src":"vinted","cat":"mode","loc":"Lille","caption":"Mode vintage \u00b7 rarissime","tags":["Cuir","Velours"],"rot":1.0,"bg":"#E8F5E8"},{"id":31,"name":"Provenance ch\u00e2teau \u2014 abat-jour","price":280,"emoji":"\ud83d\udd26","src":"ebay","cat":"luminaire","loc":"Rennes","caption":"Luminaires \u00b7 provenance ch\u00e2teau","tags":["Vintage","Laiton"],"rot":1.5,"bg":"#F5EDE0"},{"id":32,"name":"Collection \u2014 soupière","price":38,"emoji":"\ud83e\udeb4","src":"broc","cat":"vaisselle","loc":"Nice","caption":"Vaisselle \u00b7 collection","tags":["\u00c9maill\u00e9","C\u00e9ramique"],"rot":2.0,"bg":"#EDE8F5"},{"id":33,"name":"Excellent \u00e9tat \u2014 poup\u00e9e","price":160,"emoji":"\ud83c\udfae","src":"broc","cat":"jouets","loc":"Montpellier","caption":"Jouets anciens \u00b7 excellent \u00e9tat","tags":["C\u00e9lulo\u00efd","Fonte"],"rot":2.5,"bg":"#FFF0E0"},{"id":34,"name":"Fin XIXe \u2014 tourne-disque","price":180,"emoji":"\ud83d\udcfb","src":"ebay","cat":"hifi","loc":"Grenoble","caption":"Hifi \u00b7 fin xixe","tags":["Transistors","Bak\u00e9lite"],"rot":3.0,"bg":"#E8F0F5"},{"id":35,"name":"Art D\u00e9co \u2014 sculpture","price":48,"emoji":"\ud83d\uddbc\ufe0f","src":"broc","cat":"art","loc":"Limoges","caption":"Art \u00b7 art d\u00e9co","tags":["Fusain","Huile"],"rot":-2.5,"bg":"#F5E8E8"},{"id":36,"name":"Sublime \u2014 bague","price":290,"emoji":"\ud83d\udccd","src":"ebay","cat":"bijoux","loc":"Versailles","caption":"Bijoux \u0026 Montres \u00b7 sublime","tags":["Plaqué","Or"],"rot":-2.0,"bg":"#F5E8F0"},{"id":37,"name":"Provenance atelier \u2014 magazines","price":45,"emoji":"\ud83d\udcec","src":"broc","cat":"papier","loc":"Saint-Ouen","caption":"\u00c9ph\u00e9m\u00e8res \u00b7 provenance atelier","tags":["Lithographie","Papier"],"rot":-1.5,"bg":"#FDF5E0"},{"id":38,"name":"Signé \u2014 chaise","price":55,"emoji":"\ud83e\ude91","src":"broc","cat":"mobilier","loc":"Rouen","caption":"Mobilier \u00b7 sign\u00e9","tags":["H\u00eatre","Osier"],"rot":-1.0,"bg":"#F5EBE0"},{"id":39,"name":"Original \u2014 t\u00e9l\u00e9m\u00e8tre","price":65,"emoji":"\ud83d\udcf7","src":"ebay","cat":"photo","loc":"Paris 11e","caption":"Photo \u0026 Optique \u00b7 original","tags":["Japonais","Argentin"],"rot":-0.5,"bg":"#E8EEF5"},{"id":40,"name":"Authentique \u2014 sac","price":180,"emoji":"\ud83e\udde5","src":"vinted","cat":"mode","loc":"Lyon 3e","caption":"Mode vintage \u00b7 authentique","tags":["Soie","Cuir"],"rot":0.0,"bg":"#E8F5E8"},{"id":41,"name":"Belle patine \u2014 lampe","price":85,"emoji":"\ud83d\udd26","src":"ebay","cat":"luminaire","loc":"Marseille","caption":"Luminaires \u00b7 belle patine","tags":["Industriel","M\u00e9tal"],"rot":0.5,"bg":"#F5EDE0"},{"id":42,"name":"Art Nouveau \u2014 cafeti\u00e8re","price":8,"emoji":"\ud83e\udeb4","src":"broc","cat":"vaisselle","loc":"Bordeaux","caption":"Vaisselle \u00b7 art nouveau","tags":["Fa\u00efence","Porcelaine"],"rot":1.0,"bg":"#EDE8F5"},{"id":43,"name":"Rarissime \u2014 voiture en t\u00f4le","price":160,"emoji":"\ud83c\udfae","src":"broc","cat":"jouets","loc":"Toulouse","caption":"Jouets anciens \u00b7 rarissime","tags":["Fonte","T\u00f4le"],"rot":1.5,"bg":"#FFF0E0"},{"id":44,"name":"Excellent \u00e9tat \u2014 ampli","price":420,"emoji":"\ud83d\udcfb","src":"ebay","cat":"hifi","loc":"Nantes","caption":"Hifi \u00b7 excellent \u00e9tat","tags":["Valves","Analogique"],"rot":2.0,"bg":"#E8F0F5"},{"id":45,"name":"Collection \u2014 dessin","price":48,"emoji":"\ud83d\uddbc\ufe0f","src":"broc","cat":"art","loc":"Strasbourg","caption":"Art \u00b7 collection","tags":["Lithographie","Fusain"],"rot":2.5,"bg":"#F5E8E8"},{"id":46,"name":"Provenance ch\u00e2teau \u2014 bracelet","price":18,"emoji":"\ud83d\udccd","src":"vinted","cat":"bijoux","loc":"Lille","caption":"Bijoux \u0026 Montres \u00b7 provenance ch\u00e2teau","tags":["Strass","Nacre"],"rot":3.0,"bg":"#F5E8F0"},{"id":47,"name":"Fin XIXe \u2014 affiches","price":5,"emoji":"\ud83d\udcec","src":"broc","cat":"papier","loc":"Rennes","caption":"\u00c9ph\u00e9m\u00e8res \u00b7 fin xixe","tags":["Papier","S\u00e9rigraphie"],"rot":-2.5,"bg":"#FDF5E0"},{"id":48,"name":"Art D\u00e9co \u2014 buffet","price":480,"emoji":"\ud83e\ude91","src":"broc","cat":"mobilier","loc":"Nice","caption":"Mobilier \u00b7 art d\u00e9co","tags":["Ch\u00eane","Bambou"],"rot":-2.0,"bg":"#F5EBE0"},{"id":49,"name":"Sublime \u2014 objectif","price":35,"emoji":"\ud83d\udcf7","src":"ebay","cat":"photo","loc":"Montpellier","caption":"Photo \u0026 Optique \u00b7 sublime","tags":["Argentin","M\u00e9canique"],"rot":-1.5,"bg":"#E8EEF5"},{"id":50,"name":"Signé \u2014 chapeau","price":180,"emoji":"\ud83e\udde5","src":"vinted","cat":"mode","loc":"Grenoble","caption":"Mode vintage \u00b7 sign\u00e9","tags":["Lin","Laine"],"rot":-1.0,"bg":"#E8F5E8"},{"id":51,"name":"Original \u2014 applique","price":25,"emoji":"\ud83d\udd26","src":"ebay","cat":"luminaire","loc":"Limoges","caption":"Luminaires \u00b7 original","tags":["Laiton","Industriel"],"rot":-0.5,"bg":"#F5EDE0"},{"id":52,"name":"Authentique \u2014 presse-citron","price":75,"emoji":"\ud83e\udeb4","src":"broc","cat":"vaisselle","loc":"Versailles","caption":"Vaisselle \u00b7 authentique","tags":["\u00c9maill\u00e9","Fa\u00efence"],"rot":0.0,"bg":"#EDE8F5"},{"id":53,"name":"Belles patine \u2014 toupie","price":12,"emoji":"\ud83c\udfae","src":"broc","cat":"jouets","loc":"Saint-Ouen","caption":"Jouets anciens \u00b7 belles patine","tags":["T\u00f4le","Bois peint"],"rot":0.5,"bg":"#FFF0E0"},{"id":54,"name":"Art Nouveau \u2014 platine","price":180,"emoji":"\ud83d\udcfb","src":"ebay","cat":"hifi","loc":"Rouen","caption":"Hifi \u00b7 art nouveau","tags":["Bak\u00e9lite","Valves"],"rot":1.0,"bg":"#E8F0F5"},{"id":55,"name":"Rarissime \u2014 aquarelle","price":650,"emoji":"\ud83d\uddbc\ufe0f","src":"broc","cat":"art","loc":"Paris 11e","caption":"Art \u00b7 rarissime","tags":["Aquarelle","Huile"],"rot":1.5,"bg":"#F5E8E8"},{"id":56,"name":"Excellent \u00e9tat \u2014 montre","price":290,"emoji":"\ud83d\udccd","src":"ebay","cat":"bijoux","loc":"Lyon 3e","caption":"Bijoux \u0026 Montres \u00b7 excellent \u00e9tat","tags":["Or","Plaqué"],"rot":2.0,"bg":"#F5E8F0"},{"id":57,"name":"Collection \u2014 cartes postales","price":45,"emoji":"\ud83d\udcec","src":"broc","cat":"papier","loc":"Marseille","caption":"\u00c9ph\u00e9m\u00e8res \u00b7 collection","tags":["Cartonn\u00e9","Lithographie"],"rot":2.5,"bg":"#FDF5E0"},{"id":58,"name":"Provenance atelier \u2014 table","price":40,"emoji":"\ud83e\ude91","src":"broc","cat":"mobilier","loc":"Bordeaux","caption":"Mobilier \u00b7 provenance atelier","tags":["Osier","Ch\u00eane"],"rot":3.0,"bg":"#F5EBE0"},{"id":59,"name":"Fin XIXe \u2014 jumelles","price":320,"emoji":"\ud83d\udcf7","src":"ebay","cat":"photo","loc":"Toulouse","caption":"Photo \u0026 Optique \u00b7 fin xixe","tags":["Optique","Japonais"],"rot":-2.5,"bg":"#E8EEF5"},{"id":60,"name":"Art D\u00e9co \u2014 veste","price":22,"emoji":"\ud83e\udde5","src":"vinted","cat":"mode","loc":"Nantes","caption":"Mode vintage \u00b7 art d\u00e9co","tags":["Velours","Lin"],"rot":-2.0,"bg":"#E8F5E8"},{"id":61,"name":"Sublime \u2014 lustre","price":280,"emoji":"\ud83d\udd26","src":"ebay","cat":"luminaire","loc":"Strasbourg","caption":"Luminaires \u00b7 sublime","tags":["Vintage","Laiton"],"rot":-1.5,"bg":"#F5EDE0"},{"id":62,"name":"Signé \u2014 pichet","price":8,"emoji":"\ud83e\udeb4","src":"broc","cat":"vaisselle","loc":"Lille","caption":"Vaisselle \u00b7 sign\u00e9","tags":["Porcelaine","C\u00e9ramique"],"rot":-1.0,"bg":"#EDE8F5"},{"id":63,"name":"Original \u2014 train","price":160,"emoji":"\ud83c\udfae","src":"broc","cat":"jouets","loc":"Rennes","caption":"Jouets anciens \u00b7 original","tags":["Bois peint","C\u00e9lulo\u00efd"],"rot":-0.5,"bg":"#FFF0E0"},{"id":64,"name":"Authentique \u2014 radio","price":92,"emoji":"\ud83d\udcfb","src":"ebay","cat":"hifi","loc":"Nice","caption":"Hifi \u00b7 authentique","tags":["Transistors","Analogique"],"rot":0.0,"bg":"#E8F0F5"},{"id":65,"name":"Belles patines \u2014 gravure","price":28,"emoji":"\ud83d\uddbc\ufe0f","src":"broc","cat":"art","loc":"Montpellier","caption":"Art \u00b7 belles patines","tags":["Gravure","Aquarelle"],"rot":0.5,"bg":"#F5E8E8"},{"id":66,"name":"Art Nouveau \u2014 broche","price":290,"emoji":"\ud83d\udccd","src":"vinted","cat":"bijoux","loc":"Grenoble","caption":"Bijoux \u0026 Montres \u00b7 art nouveau","tags":["Nacre","Or"],"rot":1.0,"bg":"#F5E8F0"},{"id":67,"name":"Rarissime \u2014 affiches","price":5,"emoji":"\ud83d\udcec","src":"broc","cat":"papier","loc":"Limoges","caption":"\u00c9ph\u00e9m\u00e8res \u00b7 rarissime","tags":["S\u00e9rigraphie","Cartonn\u00e9"],"rot":1.5,"bg":"#FDF5E0"},{"id":68,"name":"Provenance ch\u00e2teau \u2014 secrétaire","price":480,"emoji":"\ud83e\ude91","src":"broc","cat":"mobilier","loc":"Versailles","caption":"Mobilier \u00b7 provenance ch\u00e2teau","tags":["H\u00eatre","Bois"],"rot":2.0,"bg":"#F5EBE0"},{"id":69,"name":"Excellent \u00e9tat \u2014 t\u00e9l\u00e9m\u00e8tre","price":65,"emoji":"\ud83d\udcf7","src":"ebay","cat":"photo","loc":"Saint-Ouen","caption":"Photo \u0026 Optique \u00b7 excellent \u00e9tat","tags":["M\u00e9canique","Optique"],"rot":2.5,"bg":"#E8EEF5"},{"id":70,"name":"Collection \u2014 manteau","price":22,"emoji":"\ud83e\udde5","src":"vinted","cat":"mode","loc":"Rouen","caption":"Mode vintage \u00b7 collection","tags":["Laine","Soie"],"rot":3.0,"bg":"#E8F5E8"},{"id":71,"name":"Fin XIXe \u2014 abat-jour","price":25,"emoji":"\ud83d\udd26","src":"ebay","cat":"luminaire","loc":"Paris 11e","caption":"Luminaires \u00b7 fin xixe","tags":["M\u00e9tal","Industriel"],"rot":-2.5,"bg":"#F5EDE0"},{"id":72,"name":"Art D\u00e9co \u2014 soupière","price":95,"emoji":"\ud83e\udeb4","src":"broc","cat":"vaisselle","loc":"Lyon 3e","caption":"Vaisselle \u00b7 art d\u00e9co","tags":["\u00c9maill\u00e9","Fa\u00efence"],"rot":-2.0,"bg":"#EDE8F5"},{"id":73,"name":"Sublime \u2014 poup\u00e9e","price":12,"emoji":"\ud83c\udfae","src":"broc","cat":"jouets","loc":"Marseille","caption":"Jouets anciens \u00b7 sublime","tags":["Fonte","T\u00f4le"],"rot":-1.5,"bg":"#FFF0E0"},{"id":74,"name":"Signé \u2014 tourne-disque","price":420,"emoji":"\ud83d\udcfb","src":"ebay","cat":"hifi","loc":"Bordeaux","caption":"Hifi \u00b7 sign\u00e9","tags":["Valves","Bak\u00e9lite"],"rot":-1.0,"bg":"#E8F0F5"},{"id":75,"name":"Original \u2014 c\u00e9ramique d'art","price":28,"emoji":"\ud83d\uddbc\ufe0f","src":"broc","cat":"art","loc":"Toulouse","caption":"Art \u00b7 original","tags":["Fusain","Gravure"],"rot":-0.5,"bg":"#F5E8E8"},{"id":76,"name":"Authentique \u2014 collier","price":18,"emoji":"\ud83d\udccd","src":"vinted","cat":"bijoux","loc":"Nantes","caption":"Bijoux \u0026 Montres \u00b7 authentique","tags":["Strass","Argent"],"rot":0.0,"bg":"#F5E8F0"},{"id":77,"name":"Belle patine \u2014 partitions","price":45,"emoji":"\ud83d\udcec","src":"broc","cat":"papier","loc":"Strasbourg","caption":"\u00c9ph\u00e9m\u00e8res \u00b7 belles patines","tags":["Lithographie","S\u00e9rigraphie"],"rot":0.5,"bg":"#FDF5E0"},{"id":78,"name":"Art Nouveau \u2014 tabouret","price":55,"emoji":"\ud83e\ude91","src":"broc","cat":"mobilier","loc":"Lille","caption":"Mobilier \u00b7 art nouveau","tags":["Bambou","Osier"],"rot":1.0,"bg":"#F5EBE0"},{"id":79,"name":"Rarissime \u2014 loupe","price":35,"emoji":"\ud83d\udcf7","src":"ebay","cat":"photo","loc":"Rennes","caption":"Photo \u0026 Optique \u00b7 rarissime","tags":["Japonais","Argentin"],"rot":1.5,"bg":"#E8EEF5"},{"id":80,"name":"Excellent \u00e9tat \u2014 robe","price":180,"emoji":"\ud83e\udde5","src":"vinted","cat":"mode","loc":"Nice","caption":"Mode vintage \u00b7 excellent \u00e9tat","tags":["Cuir","Lin"],"rot":2.0,"bg":"#E8F5E8"},{"id":81,"name":"Provenance ch\u00e2teau \u2014 lanterne","price":280,"emoji":"\ud83d\udd26","src":"ebay","cat":"luminaire","loc":"Montpellier","caption":"Luminaires \u00b7 provenance ch\u00e2teau","tags":["Laiton","Vintage"],"rot":2.5,"bg":"#F5EDE0"},{"id":82,"name":"Collection \u2014 cafeti\u00e8re","price":8,"emoji":"\ud83e\udeb4","src":"broc","cat":"vaisselle","loc":"Grenoble","caption":"Vaisselle \u00b7 collection","tags":["Fa\u00efence","\u00c9maill\u00e9"],"rot":3.0,"bg":"#EDE8F5"},{"id":83,"name":"Fin XIXe \u2014 soldat de plomb","price":12,"emoji":"\ud83c\udfae","src":"broc","cat":"jouets","loc":"Limoges","caption":"Jouets anciens \u00b7 fin xixe","tags":["C\u00e9lulo\u00efd","Bois peint"],"rot":-2.5,"bg":"#FFF0E0"},{"id":84,"name":"Art D\u00e9co \u2014 enceintes","price":55,"emoji":"\ud83d\udcfb","src":"ebay","cat":"hifi","loc":"Versailles","caption":"Hifi \u00b7 art d\u00e9co","tags":["Analogique","Transistors"],"rot":-2.0,"bg":"#E8F0F5"},{"id":85,"name":"Sublime \u2014 huile sur toile","price":650,"emoji":"\ud83d\uddbc\ufe0f","src":"broc","cat":"art","loc":"Saint-Ouen","caption":"Art \u00b7 sublime","tags":["Huile","Fusain"],"rot":-1.5,"bg":"#F5E8E8"},{"id":86,"name":"Signé \u2014 bague","price":18,"emoji":"\ud83d\udccd","src":"vinted","cat":"bijoux","loc":"Rouen","caption":"Bijoux \u0026 Montres \u00b7 sign\u00e9","tags":["Plaqué","Strass"],"rot":-1.0,"bg":"#F5E8F0"},{"id":87,"name":"Original \u2014 magazines","price":5,"emoji":"\ud83d\udcec","src":"broc","cat":"papier","loc":"Paris 11e","caption":"\u00c9ph\u00e9m\u00e8res \u00b7 original","tags":["Papier","Cartonn\u00e9"],"rot":-0.5,"bg":"#FDF5E0"},{"id":88,"name":"Authentique \u2014 chaise","price":480,"emoji":"\ud83e\ude91","src":"broc","cat":"mobilier","loc":"Lyon 3e","caption":"Mobilier \u00b7 authentique","tags":["Ch\u00eane","H\u00eatre"],"rot":0.0,"bg":"#F5EBE0"},{"id":89,"name":"Belles patines \u2014 appareil photo","price":320,"emoji":"\ud83d\udcf7","src":"ebay","cat":"photo","loc":"Marseille","caption":"Photo \u0026 Optique \u00b7 belles patines","tags":["Argentin","Optique"],"rot":0.5,"bg":"#E8EEF5"},{"id":90,"name":"Art Nouveau \u2014 veste","price":22,"emoji":"\ud83e\udde5","src":"vinted","cat":"mode","loc":"Bordeaux","caption":"Mode vintage \u00b7 art nouveau","tags":["Velours","Laine"],"rot":1.0,"bg":"#E8F5E8"},{"id":91,"name":"Rarissime \u2014 applique","price":25,"emoji":"\ud83d\udd26","src":"ebay","cat":"luminaire","loc":"Toulouse","caption":"Luminaires \u00b7 rarissime","tags":["Industriel","Laiton"],"rot":1.5,"bg":"#F5EDE0"},{"id":92,"name":"Excellent \u00e9tat \u2014 assiettes","price":38,"emoji":"\ud83e\udeb4","src":"broc","cat":"vaisselle","loc":"Nantes","caption":"Vaisselle \u00b7 excellent \u00e9tat","tags":["C\u00e9ramique","Porcelaine"],"rot":2.0,"bg":"#EDE8F5"},{"id":93,"name":"Collection \u2014 voiture en t\u00f4le","price":160,"emoji":"\ud83c\udfae","src":"broc","cat":"jouets","loc":"Strasbourg","caption":"Jouets anciens \u00b7 collection","tags":["T\u00f4le","Fonte"],"rot":2.5,"bg":"#FFF0E0"},{"id":94,"name":"Provenance atelier \u2014 ampli","price":180,"emoji":"\ud83d\udcfb","src":"ebay","cat":"hifi","loc":"Lille","caption":"Hifi \u00b7 provenance atelier","tags":["Bak\u00e9lite","Valves"],"rot":3.0,"bg":"#E8F0F5"},{"id":95,"name":"Fin XIXe \u2014 estampe","price":48,"emoji":"\ud83d\uddbc\ufe0f","src":"broc","cat":"art","loc":"Rennes","caption":"Art \u00b7 fin xixe","tags":["Aquarelle","Lithographie"],"rot":-2.5,"bg":"#F5E8E8"},{"id":96,"name":"Art D\u00e9co \u2014 montre","price":18,"emoji":"\ud83d\udccd","src":"vinted","cat":"bijoux","loc":"Nice","caption":"Bijoux \u0026 Montres \u00b7 art d\u00e9co","tags":["Or","Nacre"],"rot":-2.0,"bg":"#F5E8F0"},{"id":97,"name":"Sublime \u2014 cartes postales","price":12,"emoji":"\ud83d\udcec","src":"broc","cat":"papier","loc":"Montpellier","caption":"\u00c9ph\u00e9m\u00e8res \u00b7 sublime","tags":["Cartonn\u00e9","Papier"],"rot":-1.5,"bg":"#FDF5E0"},{"id":98,"name":"Signé \u2014 buffet","price":40,"emoji":"\ud83e\ude91","src":"broc","cat":"mobilier","loc":"Grenoble","caption":"Mobilier \u00b7 sign\u00e9","tags":["Osier","Bambou"],"rot":-1.0,"bg":"#F5EBE0"},{"id":99,"name":"Original \u2014 jumelles","price":65,"emoji":"\ud83d\udcf7","src":"ebay","cat":"photo","loc":"Limoges","caption":"Photo \u0026 Optique \u00b7 original","tags":["M\u00e9canique","Japonais"],"rot":-0.5,"bg":"#E8EEF5"},{"id":100,"name":"Authentique \u2014 manteau","price":180,"emoji":"\ud83e\udde5","src":"vinted","cat":"mode","loc":"Versailles","caption":"Mode vintage \u00b7 authentique","tags":["Lin","Velours"],"rot":0.0,"bg":"#E8F5E8"},{"id":101,"name":"Belles patines \u2014 lampe","price":85,"emoji":"\ud83d\udd26","src":"ebay","cat":"luminaire","loc":"Saint-Ouen","caption":"Luminaires \u00b7 belles patines","tags":["Vintage","M\u00e9tal"],"rot":0.5,"bg":"#F5EDE0"},{"id":102,"name":"Art Nouveau \u2014 service \u00e0 th\u00e9","price":95,"emoji":"\ud83e\udeb4","src":"broc","cat":"vaisselle","loc":"Rouen","caption":"Vaisselle \u00b7 art nouveau","tags":["Fa\u00efence","C\u00e9ramique"],"rot":1.0,"bg":"#EDE8F5"},{"id":103,"name":"Rarissime \u2014 toupie","price":12,"emoji":"\ud83c\udfae","src":"broc","cat":"jouets","loc":"Paris 11e","caption":"Jouets anciens \u00b7 rarissime","tags":["Bois peint","C\u00e9lulo\u00efd"],"rot":1.5,"bg":"#FFF0E0"},{"id":104,"name":"Excellent \u00e9tat \u2014 platine","price":420,"emoji":"\ud83d\udcfb","src":"ebay","cat":"hifi","loc":"Lyon 3e","caption":"Hifi \u00b7 excellent \u00e9tat","tags":["Analogique","Bak\u00e9lite"],"rot":2.0,"bg":"#E8F0F5"},{"id":105,"name":"Collection \u2014 dessin","price":650,"emoji":"\ud83d\uddbc\ufe0f","src":"broc","cat":"art","loc":"Marseille","caption":"Art \u00b7 collection","tags":["Fusain","Aquarelle"],"rot":2.5,"bg":"#F5E8E8"},{"id":106,"name":"Provenance ch\u00e2teau \u2014 bracelet","price":290,"emoji":"\ud83d\udccd","src":"vinted","cat":"bijoux","loc":"Bordeaux","caption":"Bijoux \u0026 Montres \u00b7 provenance ch\u00e2teau","tags":["Strass","Plaqué"],"rot":3.0,"bg":"#F5E8F0"},{"id":107,"name":"Fin XIXe \u2014 affiches","price":45,"emoji":"\ud83d\udcec","src":"broc","cat":"papier","loc":"Toulouse","caption":"\u00c9ph\u00e9m\u00e8res \u00b7 fin xixe","tags":["S\u00e9rigraphie","Lithographie"],"rot":-2.5,"bg":"#FDF5E0"},{"id":108,"name":"Art D\u00e9co \u2014 table","price":55,"emoji":"\ud83e\ude91","src":"broc","cat":"mobilier","loc":"Nantes","caption":"Mobilier \u00b7 art d\u00e9co","tags":["H\u00eatre","Ch\u00eane"],"rot":-2.0,"bg":"#F5EBE0"}];
+var CATS=[{key:"luminaire",n:"Luminaires",e:"💡"},{key:"vaisselle",n:"Vaisselle",e:"🫖"},{key:"mode",n:"Mode",e:"🧥"},{key:"deco",n:"Décoration",e:"🪞"},{key:"photo",n:"Photo",e:"📷"},{key:"mobilier",n:"Mobilier",e:"🪑"},{key:"papier",n:"Éphémères",e:"📬"},{key:"hifi",n:"Hifi",e:"🎵"},{key:"art",n:"Art",e:"🖼️"},{key:"cuisine",n:"Cuisine",e:"☕"},{key:"bijoux",n:"Bijoux",e:"💍"},{key:"jouets",n:"Jouets",e:"🎠"}];
+var idx=0,cart=[],liked=[],taste={},dragging=false,sx=0,curX=0,activeCard=null;
 
 function srcBadge(s){
-  const m={ebay:"eBay FR",vinted:"Vinted",broc:"Vide-grenier"};
-  const c={ebay:"sb-ebay",vinted:"sb-vint",broc:"sb-broc"};
-  return `<span class="src-badge ${c[s]||'sb-broc'}">${m[s]||s}</span>`;
+  var m={ebay:"eBay",vinted:"Vinted",broc:"Vide-grenier"};
+  var c={ebay:"sbe",vinted:"sbv",broc:"sbb"};
+  return '<span class="sb '+c[s]+'">'+m[s]+'</span>';
 }
 
-// ─── DECK ────────────────────────────────────────────────────────────────────
 function renderDeck(){
-  const zone = document.getElementById("deck-zone");
-  // Garde uniquement le end-screen, supprime les cartes
-  const end = document.getElementById("end-screen");
-  zone.innerHTML = "";
-  zone.appendChild(end);
+  var deck=document.getElementById('deck');
+  var end=document.getElementById('end');
+  // remove all cards
+  var cards=deck.querySelectorAll('.card');
+  cards.forEach(function(c){c.remove();});
 
-  if(idx >= ITEMS.length){
-    end.classList.add("show");
-    document.getElementById("prog-bar").style.width = "100%";
-    document.getElementById("counter").textContent = "";
+  if(idx>=ITEMS.length){
+    end.classList.add('on');
+    document.getElementById('pb').style.width='100%';
+    document.getElementById('ctr').textContent='';
     return;
   }
-  end.classList.remove("show");
+  end.classList.remove('on');
 
-  for(let i = Math.min(idx+2, ITEMS.length-1); i >= idx; i--){
-    const item = ITEMS[i];
-    const off = i - idx;
-    const card = document.createElement("div");
-    card.className = "pcard";
-    card.id = "pc"+i;
-    const rot = item.rot + off*1.8;
-    const sc = 1 - off*.032;
-    const ty = off*7;
-    card.style.transform = `rotate(${rot}deg) scale(${sc}) translateY(${ty}px)`;
-    card.style.zIndex = 10 - off;
-    if(off > 0) card.style.opacity = "0.72";
-
-    card.innerHTML = `
-      <div class="sw-hint sh-like" id="hl${i}">Pépite !</div>
-      <div class="sw-hint sh-nope">Jamais vu</div>
-      <div class="pcard-img">
-        <img src="${item.image}" alt="${item.name}"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="img-fail" style="display:none;background:${item.bg||'#F5EDE0'}">
-          ${getCatEmoji(item.cat)}
-        </div>
-      </div>
-      <div class="pcard-caption">
-        <div class="pcard-cap-text">${item.caption} ${srcBadge(item.src)}</div>
-        <div class="pcard-price">${item.price} €</div>
-      </div>
-    `;
-    if(i === idx) attachDrag(card);
-    zone.appendChild(card);
+  var max=Math.min(idx+2,ITEMS.length-1);
+  for(var i=max;i>=idx;i--){
+    var item=ITEMS[i];
+    var off=i-idx;
+    var card=document.createElement('div');
+    card.className='card';
+    card.id='card'+i;
+    var rot=item.rot+off*1.8;
+    var sc=1-off*0.032;
+    var ty=off*7;
+    card.style.transform='rotate('+rot+'deg) scale('+sc+') translateY('+ty+'px)';
+    card.style.zIndex=10-off;
+    if(off>0) card.style.opacity='0.72';
+    card.innerHTML=
+      '<div class="hl" id="hl'+i+'">Pépite !</div>'+
+      '<div class="hn" id="hn'+i+'">Jamais vu</div>'+
+      '<div class="cimg"><div class="cimg-inner" style="background:'+item.bg+'">'+item.emoji+'</div></div>'+
+      '<div class="ccap">'+
+        '<div class="ccap-t">'+item.caption+' '+srcBadge(item.src)+'</div>'+
+        '<div class="ccap-p">'+item.price+' €</div>'+
+      '</div>';
+    if(i===idx) attachDrag(card);
+    deck.appendChild(card);
   }
-  updateUI();
+  document.getElementById('pb').style.width=Math.round(idx/ITEMS.length*100)+'%';
+  document.getElementById('ctr').textContent=(idx+1)+' / '+ITEMS.length;
 }
 
-function getCatEmoji(cat){
-  const m = {luminaire:"💡",vaisselle:"🫖",mode:"🧥",deco:"🪞",photo:"📷",
-    mobilier:"🪑",papier:"📬",hifi:"🎵",art:"🖼️",cuisine:"☕",bijoux:"💍",jouets:"🎠"};
-  return m[cat]||"✦";
-}
-
-// ─── DRAG ────────────────────────────────────────────────────────────────────
 function attachDrag(card){
-  const onStart = e => {
-    dragging = true;
-    const p = e.touches ? e.touches[0] : e;
-    sx = p.clientX; curX = 0;
-    card.style.transition = "none";
-  };
-  const onMove = e => {
-    if(!dragging) return;
-    e.preventDefault && e.cancelable && e.preventDefault();
-    const p = e.touches ? e.touches[0] : e;
-    curX = p.clientX - sx;
-    const rot = ITEMS[idx].rot + curX * .07;
-    const sc = 1 - Math.abs(curX) * .0004;
-    card.style.transform = `rotate(${rot}deg) scale(${sc}) translateX(${curX}px)`;
-    const hl = document.getElementById("hl"+idx);
-    const hints = card.querySelectorAll(".sw-hint");
-    if(curX > 40){ hints[0].style.opacity=Math.min((curX-40)/70,1); hints[1].style.opacity=0; }
-    else if(curX < -40){ hints[1].style.opacity=Math.min((-curX-40)/70,1); hints[0].style.opacity=0; }
-    else { hints[0].style.opacity=0; hints[1].style.opacity=0; }
-  };
-  const onEnd = () => {
-    if(!dragging) return;
-    dragging = false;
-    card.style.transition = "transform .3s ease, opacity .3s";
-    if(curX > 80) flyOut(card, 1);
-    else if(curX < -80) flyOut(card, -1);
-    else card.style.transform = `rotate(${ITEMS[idx].rot}deg)`;
-    curX = 0;
-  };
-  card.addEventListener("mousedown", onStart);
-  card.addEventListener("touchstart", onStart, {passive:true});
-  window.addEventListener("mousemove", onMove);
-  window.addEventListener("touchmove", onMove, {passive:false});
-  window.addEventListener("mouseup", onEnd);
-  window.addEventListener("touchend", onEnd);
+  activeCard=card;
+  function getX(e){return e.touches?e.touches[0].clientX:e.clientX;}
+  card.addEventListener('mousedown',function(e){dragging=true;sx=getX(e);curX=0;card.style.transition='none';});
+  card.addEventListener('touchstart',function(e){dragging=true;sx=getX(e);curX=0;card.style.transition='none';},{passive:true});
+  document.addEventListener('mousemove',onMove);
+  document.addEventListener('touchmove',onMove,{passive:false});
+  document.addEventListener('mouseup',onEnd);
+  document.addEventListener('touchend',onEnd);
+  function onMove(e){
+    if(!dragging)return;
+    if(e.cancelable)e.preventDefault();
+    curX=getX(e)-sx;
+    var rot=ITEMS[idx].rot+curX*0.07;
+    var sc=1-Math.abs(curX)*0.0004;
+    card.style.transform='rotate('+rot+'deg) scale('+sc+') translateX('+curX+'px)';
+    var hl=document.getElementById('hl'+idx);
+    var hn=document.getElementById('hn'+idx);
+    if(hl&&hn){
+      if(curX>40){hl.style.opacity=Math.min((curX-40)/70,1);hn.style.opacity=0;}
+      else if(curX<-40){hn.style.opacity=Math.min((-curX-40)/70,1);hl.style.opacity=0;}
+      else{hl.style.opacity=0;hn.style.opacity=0;}
+    }
+  }
+  function onEnd(){
+    if(!dragging)return;
+    dragging=false;
+    card.style.transition='transform .3s ease, opacity .3s';
+    if(curX>80){flyOut(card,1);}
+    else if(curX<-80){flyOut(card,-1);}
+    else{card.style.transform='rotate('+ITEMS[idx].rot+'deg)';}
+    curX=0;
+    document.removeEventListener('mousemove',onMove);
+    document.removeEventListener('touchmove',onMove);
+    document.removeEventListener('mouseup',onEnd);
+    document.removeEventListener('touchend',onEnd);
+  }
 }
 
-function flyOut(card, dir){
-  card.style.transform = `rotate(${dir*22}deg) translateX(${dir*550}px)`;
-  card.style.opacity = "0";
-  setTimeout(() => { dir===1 ? confirmLike() : confirmNope(); }, 200);
+function flyOut(card,dir){
+  card.style.transform='rotate('+(dir*22)+'deg) translateX('+(dir*550)+'px)';
+  card.style.opacity='0';
+  setTimeout(function(){if(dir===1)confirmLike();else confirmNope();},220);
 }
 
-// ─── ACTIONS ─────────────────────────────────────────────────────────────────
 function confirmLike(){
-  const item = ITEMS[idx];
-  if(!cart.find(c=>c.id===item.id)) cart.push(item);
+  var item=ITEMS[idx];
+  if(!cart.find(function(c){return c.id===item.id;}))cart.push(item);
   liked.push(item.id);
-  taste[item.cat] = (taste[item.cat]||0) + 1;
-  showToast("✦ Ajoutée au panier !");
-  updateCartBadge();
-  advance();
+  taste[item.cat]=(taste[item.cat]||0)+1;
+  showToast('✦ Ajoutée au panier !');
+  updateBadge();
+  idx++;setTimeout(renderDeck,160);
 }
 function confirmNope(){
-  noped.add(ITEMS[idx].id);
-  showToast("Disparue pour toujours.");
-  advance();
+  showToast('Disparue pour toujours.');
+  idx++;setTimeout(renderDeck,160);
 }
-function advance(){ idx++; setTimeout(renderDeck, 160); }
+function doLike(){var c=document.getElementById('card'+idx);if(c)flyOut(c,1);}
+function doNope(){var c=document.getElementById('card'+idx);if(c)flyOut(c,-1);}
+function showInfo(){if(idx<ITEMS.length)showToast(ITEMS[idx].name+' · '+ITEMS[idx].loc);}
+function doPin(){if(idx<ITEMS.length)showToast('📍 '+ITEMS[idx].loc+' · '+ITEMS[idx].tags.join(', '));}
+function restart(){idx=0;renderDeck();}
 
-function doLike(){ const c=document.getElementById("pc"+idx); if(c) flyOut(c,1); }
-function doNope(){ const c=document.getElementById("pc"+idx); if(c) flyOut(c,-1); }
-function showInfo(){
-  if(idx>=ITEMS.length) return;
-  const item=ITEMS[idx];
-  showToast(`${item.name} · ${item.loc}`);
+function updateBadge(){
+  var n=document.getElementById('cartn');
+  if(cart.length>0){n.style.display='flex';n.textContent=cart.length;}
+  else n.style.display='none';
 }
-function doSurprise(){
-  if(idx>=ITEMS.length) return;
-  const item=ITEMS[idx];
-  showToast(`📍 ${item.loc} · ${item.tags.join(", ")}`);
-}
-function restartDeck(){ idx=0; renderDeck(); }
-
-function updateUI(){
-  document.getElementById("prog-bar").style.width = Math.round((idx/ITEMS.length)*100)+"%";
-  document.getElementById("counter").textContent = `${idx+1} / ${ITEMS.length}`;
-}
-function updateCartBadge(){
-  const n=document.getElementById("cart-n");
-  if(cart.length>0){n.style.display="flex";n.textContent=cart.length;}
-  else n.style.display="none";
-}
-let toastT;
+var toastT;
 function showToast(msg){
-  const t=document.getElementById("toast");
-  t.textContent=msg; t.classList.add("show");
+  var t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('on');
   clearTimeout(toastT);
-  toastT=setTimeout(()=>t.classList.remove("show"),2200);
+  toastT=setTimeout(function(){t.classList.remove('on');},2200);
 }
-
-// ─── PROFILE ─────────────────────────────────────────────────────────────────
-function openProfile(){ renderProfile(); document.getElementById("profile-panel").classList.add("open"); }
-function closeProfile(){ document.getElementById("profile-panel").classList.remove("open"); }
+function openProfile(){renderProfile();document.getElementById('pp').classList.add('on');}
+function closeProfile(){document.getElementById('pp').classList.remove('on');}
 function renderProfile(){
-  const body = document.getElementById("profile-body");
-  const maxScore = Math.max(1, ...Object.values(taste));
-  const likedItems = ITEMS.filter(i=>liked.includes(i.id));
-  body.innerHTML = `
-    <div style="margin-bottom:16px;">
-      <div class="ps-label">Ce que tu aimes</div>
-      <div class="taste-grid">
-        ${TASTE_CATS.map(tc=>{
-          const score=taste[tc.key]||0;
-          const pct=Math.round((score/maxScore)*100);
-          return `<div class="taste-card ${score>0?'active':''}">
-            <div class="taste-emoji">${tc.emoji}</div>
-            <div class="taste-name">${tc.name}</div>
-            <div class="taste-bar"><div class="taste-fill" style="width:${pct}%"></div></div>
-          </div>`;
-        }).join("")}
-      </div>
-    </div>
-    ${likedItems.length > 0 ? `
-    <div>
-      <div class="ps-label">Tes pépites (${likedItems.length})</div>
-      <div class="liked-grid">
-        ${likedItems.map(i=>`
-          <div class="liked-thumb">
-            <img class="lt-img" src="${i.image}" alt="${i.name}"
-              onerror="this.style.display='none'">
-            <div class="lt-cap">${i.caption}</div>
-          </div>
-        `).join("")}
-      </div>
-    </div>` : `<div style="text-align:center;padding:30px 20px;color:var(--ink-light);font-family:'Libre Baskerville',serif;font-style:italic;">Like quelques pépites<br>pour voir ton profil.</div>`}
-  `;
+  var body=document.getElementById('pb2');
+  var max=Math.max(1,Math.max.apply(null,Object.values(taste).concat([0])));
+  var likedItems=ITEMS.filter(function(i){return liked.indexOf(i.id)>-1;});
+  var html='<div style="margin-bottom:16px;"><div class="ps-l">Ce que tu aimes</div><div class="tg">';
+  CATS.forEach(function(tc){
+    var score=taste[tc.key]||0;
+    var pct=Math.round(score/max*100);
+    html+='<div class="tc'+(score>0?' on':'')+'"><div class="te">'+tc.e+'</div><div class="tn">'+tc.n+'</div><div class="tb"><div class="tf" style="width:'+pct+'%"></div></div></div>';
+  });
+  html+='</div></div>';
+  if(likedItems.length>0){
+    html+='<div class="ps-l">Tes pépites ('+likedItems.length+')</div><div class="lg">';
+    likedItems.forEach(function(i){
+      html+='<div class="lt"><div class="lte">'+i.emoji+'</div><div class="ltc">'+i.caption+'</div></div>';
+    });
+    html+='</div>';
+  } else {
+    html+='<div style="text-align:center;padding:30px 20px;color:#C4A882;font-style:italic;">Like quelques pépites<br>pour voir ton profil.</div>';
+  }
+  body.innerHTML=html;
 }
-
-// ─── CART ────────────────────────────────────────────────────────────────────
-function openCart(){ renderCart(); document.getElementById("cart-panel").classList.add("open"); }
-function closeCart(){ document.getElementById("cart-panel").classList.remove("open"); }
+function openCart(){renderCart();document.getElementById('cp').classList.add('on');}
+function closeCart(){document.getElementById('cp').classList.remove('on');}
 function renderCart(){
-  const body = document.getElementById("cart-body");
+  var body=document.getElementById('cb');
   if(cart.length===0){
-    body.innerHTML=`<div style="text-align:center;padding:50px 20px;color:var(--ink-light);">
-      <div style="font-size:44px;margin-bottom:14px;">🛍</div>
-      <div style="font-family:'Libre Baskerville',serif;font-size:16px;font-style:italic;">Ton panier est vide.</div>
-    </div>`;
-    document.getElementById("cart-tot-amt").textContent="0 €";
+    body.innerHTML='<div style="text-align:center;padding:50px 20px;color:#C4A882;"><div style="font-size:44px;margin-bottom:14px;">🛍</div><div style="font-style:italic;font-size:16px;">Ton panier est vide.</div></div>';
+    document.getElementById('cta').textContent='0 €';
     return;
   }
-  body.innerHTML = cart.map(i=>`
-    <div class="citem">
-      <img class="citem-img" src="${i.image}" alt="${i.name}" onerror="this.style.display='none'">
-      <div class="citem-info">
-        <div class="citem-name">${i.name}</div>
-        <div class="citem-price">${i.price} €</div>
-        <div class="citem-src">${i.loc}</div>
-      </div>
-      <button class="crm" onclick="removeCart(${i.id})"><i class="ti ti-x"></i></button>
-    </div>
-  `).join("");
-  document.getElementById("cart-tot-amt").textContent = cart.reduce((s,i)=>s+i.price,0)+" €";
+  var html='';
+  cart.forEach(function(i){
+    html+='<div class="ci"><div class="cie">'+i.emoji+'</div><div class="cii"><div class="cin">'+i.name+'</div><div class="cip">'+i.price+' €</div><div class="cis">'+i.loc+'</div></div><button class="crm" onclick="removeCart('+i.id+')">✕</button></div>';
+  });
+  body.innerHTML=html;
+  var tot=cart.reduce(function(s,i){return s+i.price;},0);
+  document.getElementById('cta').textContent=tot+' €';
 }
 function removeCart(id){
-  cart = cart.filter(i=>i.id!==id);
-  updateCartBadge(); renderCart();
-  showToast("Retirée du panier.");
+  cart=cart.filter(function(i){return i.id!==id;});
+  updateBadge();renderCart();showToast('Retirée du panier.');
 }
-function doCheckout(){
-  if(!cart.length){ showToast("Ton panier est vide !"); return; }
-  showToast(`🎉 ${cart.length} pépite${cart.length>1?'s':''} confirmée${cart.length>1?'s':''} !`);
-  cart=[]; updateCartBadge(); closeCart();
+function checkout(){
+  if(!cart.length){showToast('Ton panier est vide !');return;}
+  showToast('🎉 '+cart.length+' pépite'+(cart.length>1?'s':'')+' confirmée'+(cart.length>1?'s':'')+'!');
+  cart=[];updateBadge();closeCart();
 }
-
-// ─── INIT ────────────────────────────────────────────────────────────────────
 renderDeck();
 </script>
 </body>
 </html>
-HTMLEOF2
-
-echo "✓ index.html généré"
-wc -l /home/claude/pepite/index.html
