@@ -1,2 +1,4 @@
-[tool.vercel]
-entrypoint = "api/vinted:handler"
+[
+tool.vercel
+]
+entrypoint = "vinted:handler"
