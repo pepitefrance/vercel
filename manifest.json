@@ -1,0 +1,14 @@
+{
+  "name": "Pépite",
+  "short_name": "Pépite",
+  "description": "Le Tinder des brocantes",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FDF6EC",
+  "theme_color": "#B85C38",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "https://placehold.co/192x192/B85C38/FDF6EC?text=P&font=playfair-display", "sizes": "192x192", "type": "image/png" },
+    { "src": "https://placehold.co/512x512/B85C38/FDF6EC?text=P&font=playfair-display", "sizes": "512x512", "type": "image/png" }
+  ]
+}
